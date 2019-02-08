@@ -1,23 +1,24 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <router-view/>
+    <Curtain></Curtain>
+    <Diary></Diary>
   </div>
 </template>
 
 <script>
+import Curtain from '@/components/Curtain/Curtain'
+import Diary from '@/components/Diary/Diary'
+
 export default {
-  name: 'App'
+  name: 'App',
+  components: {
+    Curtain,
+    Diary
+  }
 }
 </script>
 
 <style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
 }
 </style>

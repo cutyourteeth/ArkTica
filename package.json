@@ -14,8 +14,16 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "css-loader": "^0.28.11",
+    "element-ui": "^2.5.4",
+    "jquery": "^3.3.1",
+    "sass-loader": "^7.1.0",
+    "scss": "^0.2.4",
+    "scss-loader": "^0.0.1",
+    "style-loader": "^0.23.1",
     "vue": "^2.5.2",
-    "vue-router": "^3.0.1"
+    "vue-router": "^3.0.1",
+    "vue-style-loader": "^3.1.2"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",

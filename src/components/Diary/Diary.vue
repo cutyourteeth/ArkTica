@@ -1,19 +1,17 @@
 <template>
-  <div class="style."></div>
+  <div class>Diary here</div>
 </template>
 
 <script type="text/ecmascript-6">
 export default {
   data () {
     return {
-
     }
   },
   components: {
-
   }
 }
 </script>
 
-<style module lang="stylus">
+<style lang="scss">
 </style>
