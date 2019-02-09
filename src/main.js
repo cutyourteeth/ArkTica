@@ -5,6 +5,7 @@ import App from './App'
 import router from './router'
 import ElementUI from 'element-ui'
 // import jquery from 'jquery'
+import '@/common/css/base.css'
 import '@/common/iconfonts/iconfont.css'
 
 // Vue.use(jquery)
