@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Curtain></Curtain>
+    <Curtain :loadTime="loadTime"></Curtain>
     <Diary></Diary>
   </div>
 </template>
