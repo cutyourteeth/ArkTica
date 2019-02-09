@@ -15,12 +15,13 @@
 <script type="text/ecmascript-6">
 import Carousel from '@/components/Public/Carousel'
 export default {
+  props: {
+  },
   data () {
     return {
     }
   },
   methods: {
-
   },
   mounted () {
   },
@@ -38,7 +39,7 @@ export default {
   width: 100%;
   height: 100vh;
 
-  Carousel{
+  Carousel {
     height: 100%;
   }
 

@@ -1,7 +1,7 @@
 <template>
   <div>
     <ul class="bgWrapper" ref="bgWrapper">
-      <li v-for="(item,key) in background.pole" :key="key">
+      <li v-for="(item,key) in imageArray" :key="key">
         <img :src="item" class="bgImage">
         <div class="left">
           <a class="iconfont icon-right-arrow slide" @click="slide(key,'next')"></a>
@@ -15,29 +15,56 @@
 </template>
 
 <script type="text/ecmascript-6">
+// import {getById,getByClass} from '@/common/js/wrapper.js'
 export default {
+  props: {
+  },
   data () {
     return {
-      background: {
-        'pole': [
-          '//img0.ph.126.net/-7Hk6njU8AF24z5yHFApuA==/1668865137018202872.jpg',
-          '//img1.ph.126.net/ib0cZbgkrnyKLdfJ_hVvyg==/6597838325286995212.jpg',
-          '//img1.ph.126.net/rnHXMP8NR5ypclBlkN_DRw==/1706301308920514296.jpg',
-          '//img1.ph.126.net/lFiKB5rjttuXZhFC_dZaNA==/6597352341147786499.jpg'
-        ],
-        'city': [
+      background: [{
+        name: 'pole',
+        src: [
           '//img0.ph.126.net/-7Hk6njU8AF24z5yHFApuA==/1668865137018202872.jpg',
           '//img1.ph.126.net/ib0cZbgkrnyKLdfJ_hVvyg==/6597838325286995212.jpg',
           '//img1.ph.126.net/rnHXMP8NR5ypclBlkN_DRw==/1706301308920514296.jpg',
           '//img1.ph.126.net/lFiKB5rjttuXZhFC_dZaNA==/6597352341147786499.jpg'
         ]
-      }
+      },
+      {
+        name: 'city',
+        src: [
+          '//img0.ph.126.net/dsKVTYIrw8CNpRXGk0a-vw==/2040693581252982372.jpg',
+          '//img0.ph.126.net/_IcBs08hvac2WObV3aQ7lA==/6608205620426192409.jpg',
+          '//img0.ph.126.net/wX73PF4M7kr2EF2msFIzFA==/6599299576239889152.jpg',
+          '//img0.ph.126.net/5mubBz8v410XsyG-hMPymQ==/116530640458758939.jpg',
+          '//img1.ph.126.net/LFz8Y6LxzWTQyxSNiRRKaQ==/1941332914473925501.jpg'
+        ]
+      }],
+      imageArray: [],
+      loadTime: {}
     }
   },
-  components: {
+  computed: {
+  },
+  methods: {
+    select (name) {
+      this.background.forEach(value => {
+        if (value.name === name) this.imageArray = value.src
+      })
+    },
+    initalTime () {
+      let hour = this.$parent.$parent.loadTime.hour // 有没有更简便的写法
+      this.select(hour <= 15 ? 'pole' : 'city')
+    },
+    carousel () {
 
+    }
+  },
+  mounted () {
+    this.initalTime()
   }
 }
+
 </script>
 
 <style scoped lang="scss">
