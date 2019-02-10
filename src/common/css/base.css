@@ -139,7 +139,8 @@ body {
   text-align: center;
   font-family: '微软雅黑', 'Microsoft YaHei';
   font-family: 'Source Sans Pro', sans-serif;
-  background-color: rgb(108, 173, 223);
+  /* background-color: rgb(108, 173, 223); */
+  background-color: rgb(0, 0, 0, 0.3);
 }
 
 h1,

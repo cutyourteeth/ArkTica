@@ -4,11 +4,12 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import ElementUI from 'element-ui'
-// import jquery from 'jquery'
+import axios from 'axios'
+import VueAxios from 'vue-axios'
 import '@/common/css/base.css'
 import '@/common/iconfonts/iconfont.css'
 
-// Vue.use(jquery)
+Vue.use(VueAxios, axios)
 Vue.use(ElementUI)
 Vue.config.productionTip = false
 

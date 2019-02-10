@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Curtain :loadTime="loadTime"></Curtain>
+    <Curtain :theme="theme"></Curtain>
     <Diary></Diary>
   </div>
 </template>
@@ -10,20 +10,29 @@ import Curtain from '@/components/Curtain/Curtain'
 import Diary from '@/components/Diary/Diary'
 
 export default {
-
   name: 'App',
   data () {
     return {
       loadTime: {
         hour: '',
         minute: '',
-        string: `${this.hour}:${this.minute}`
-      }
+        string: ``
+      },
+      themes: {},
+      theme: {}
     }
   },
   components: {
     Curtain,
     Diary
+  },
+  computed: {
+  },
+  watch: {
+    themes: function () {
+      const name = this.loadTime.hour <= 18 && this.loadTime.hour >= 8 ? 'pole' : 'night'
+      this.theme = this.themes[name]
+    }
   },
   methods: {
     initialLoadTime () {
@@ -32,13 +41,17 @@ export default {
       this.loadTime.minute = time.getMinutes()
     }
   },
-  mounted () {
+  created () {
     this.initialLoadTime()
+    this.axios
+      .get('./static/theme/theme.json')
+      .then(response => (this.themes = response.data))
+      .catch(error => console.log(error))
+  },
+  mounted () {
   }
 }
 </script>
 
 <style>
-#app {
-}
 </style>

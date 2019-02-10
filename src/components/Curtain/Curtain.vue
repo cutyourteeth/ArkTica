@@ -10,55 +10,24 @@
 </template>
 
 <script type="text/ecmascript-6">
-import Carousel from '@/components/Public/Carousel'
+import Carousel from './Carousel'
 export default {
   props: {
-    loadTime: {
-      type: Object
+    theme: {
+      type: Object,
+      default () {
+        return {
+          text: '',
+          background: []
+        }
+      }
     }
   },
   data () {
     return {
-      themes: [{
-        name: 'pole',
-        text: 'welcome back to the port',
-        background: [
-          '//img0.ph.126.net/-7Hk6njU8AF24z5yHFApuA==/1668865137018202872.jpg',
-          '//img1.ph.126.net/ib0cZbgkrnyKLdfJ_hVvyg==/6597838325286995212.jpg',
-          '//img1.ph.126.net/rnHXMP8NR5ypclBlkN_DRw==/1706301308920514296.jpg',
-          '//img1.ph.126.net/lFiKB5rjttuXZhFC_dZaNA==/6597352341147786499.jpg'
-        ]
-      }, {
-        name: 'night',
-        text: 'night, deep sleepy night awaits',
-        background: [
-          '//img0.ph.126.net/dsKVTYIrw8CNpRXGk0a-vw==/2040693581252982372.jpg',
-          '//img0.ph.126.net/wX73PF4M7kr2EF2msFIzFA==/6599299576239889152.jpg',
-          '//img0.ph.126.net/_IcBs08hvac2WObV3aQ7lA==/6608205620426192409.jpg',
-          '//img0.ph.126.net/5mubBz8v410XsyG-hMPymQ==/116530640458758939.jpg',
-          '//img1.ph.126.net/LFz8Y6LxzWTQyxSNiRRKaQ==/1941332914473925501.jpg'
-        ]
-      }],
-      theme: {}
     }
   },
   methods: {
-    wait (ms) {
-      return new Promise(function (resolve, reject) {
-        setTimeout(function () {
-          resolve()
-        }, ms)
-      })
-    },
-    setTheme () {
-      const themeName = this.loadTime.hour <= 17 ? 'pole' : 'night'
-      this.themes.forEach(value => {
-        if (value.name === themeName) this.theme = value
-      })
-    }
-  },
-  mounted () {
-    this.setTheme()
   },
   components: {
     Carousel

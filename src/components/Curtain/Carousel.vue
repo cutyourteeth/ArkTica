@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ul class="bgWrapper" ref="bgWrapper" v-if="theme.length!==0">
+    <ul class="bgWrapper" ref="bgWrapper">
       <img :src="imageCurrent" class="bgImage">
       <div class="left">
         <a class="iconfont icon-right-arrow slide" @click="slide(key,'next')"></a>
@@ -13,31 +13,42 @@
 </template>
 
 <script type="text/ecmascript-6">
-// import {getById,getByClass} from '@/common/js/wrapper.js'
 export default {
   props: {
     theme: {
-      type: Object
+      type: Object,
+      default () {
+        return {
+          text: '',
+          background: []
+        }
+      }
     }
   },
   data () {
     return {
-      imageCurrent: '',
-      imageIndex: 0
+      background: [],
+      imageIndex: 0,
+      imageCurrent: null
     }
   },
-  computed: {
+  watch: {
+    theme: function () {
+      this.background = this.theme.background
+    },
+    background: function () {
+      this.carousel()
+      setInterval(this.carousel, 8000)
+    }
   },
   methods: {
     carousel () {
-      if (this.imageIndex === this.theme.background.length) this.imageIndex = 0
-      this.imageCurrent = this.theme.background[this.imageIndex]
+      if (this.imageIndex === this.background.length) this.imageIndex = 0
+      this.imageCurrent = this.background[this.imageIndex]
       return this.imageIndex++
     }
   },
-  updated () {
-    this.carousel()
-    // setInterval(this.carousel(), 8000)
+  mounted () {
   }
 }
 
