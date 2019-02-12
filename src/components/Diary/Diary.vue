@@ -3,7 +3,7 @@
     <Navibar></Navibar>
     <div class="contentWrapper">
       <Log v-if="!!isWriting"></Log>
-      <Saver v-if="!isWriting"></Saver>
+      <Saver v-if="!!isWriting"></Saver>
     </div>
   </div>
 </template>
@@ -15,7 +15,7 @@ import Saver from './Saver/Saver'
 export default {
   data () {
     return {
-      isWriting: false
+      isWriting: true
     }
   },
   components: {

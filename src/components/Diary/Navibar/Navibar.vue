@@ -1,13 +1,15 @@
 <template>
   <Panel class="header">
-    <span class="iconfont icon-find find"></span>
-    <span class="dateWrapper">
+    <a class="callSidebar">
+      <div class="menu-icon"></div>
+    </a>
+    <span class="dateWrapper" @click="expand">
       {{formatDate}}
-      <i class="iconfont icon-arrow_down" @click="selectDate()"></i>
-      <!-- <input type="date" @change="setDate()" id="selector"> -->
-      <Calendar v-if="isExpanded"></Calendar>
+      <Calendar v-show="isExpanded" :today="today" :chosen="chosen"></Calendar>
     </span>
     <span class="right">
+      <span class="iconfont icon-find find">查找</span>
+      <span class="iconfont icon-favorite favorite">收藏</span>
       <em @click="rewind()">今天</em>
       <i class="iconfont icon-arrow_down"></i>
     </span>
@@ -19,55 +21,49 @@ import Panel from '@/components/Core/Panel'
 import Calendar from './Calendar'
 
 export default {
-  props: {
-    today: {
-      type: Object,
-      default () {
-        return {
-          year: '',
-          month: '',
-          date: '',
-          weekday: '',
-          leapYear: false
-        }
-      }
-    },
-    chosen: {
-      type: Object,
-      default () {
-        return {
-          year: '',
-          month: '',
-          date: '',
-          weekday: '',
-          leapYear: false
-        }
-      }
-    }
-  },
   data () {
     return {
-      isExpanded: true
+      today: {
+        year: '',
+        month: '',
+        date: '',
+        weekday: '',
+        leapYear: false
+      },
+      chosen: {
+        year: '',
+        month: '',
+        date: '',
+        weekday: '',
+        leapYear: false
+      },
+      isExpanded: false
     }
   },
   computed: {
-    formatDate: function () {
+    formatDate () {
+      // 防止直接对this.chosen做属性改动
       let month = this.chosen.month
       let date = this.chosen.date
-      if (this.chosen.month < 10) {
-        month = '0' + this.chosen.month
-      }
-      if (this.chosen.date < 10) {
-        date = '0' + this.chosen.date
-      }
+      if (this.chosen.month < 10) month = '0' + this.chosen.month
+      if (this.chosen.date < 10) date = '0' + this.chosen.date
       const addup = this.chosen.year + '-' + month + '-' + date
       return addup
     }
   },
+  mounted () {
+    this.initialDate()
+  },
   methods: {
-    selectDate () {
-      const selector = document.getElementById('selector')
-      selector.click()
+    initialDate () {
+      const localTime = new Date()
+      this.chosen.year = this.today.year = localTime.getFullYear()
+      this.chosen.month = this.today.month = localTime.getMonth() + 1
+      this.chosen.date = this.today.date = localTime.getDate()
+      this.chosen.weekday = this.today.weekday = localTime.getDay()
+    },
+    expand () {
+      this.isExpanded = !this.isExpanded
     },
     setDate () {
       let selector = document.getElementById('selector')
@@ -78,7 +74,7 @@ export default {
       rechoose.date = parseInt(dateArray[2])
       rechoose.weekday = parseInt(this.getWeekday(dateArray[0], dateArray[1], dateArray[2]))
       rechoose.leapYear = parseInt(this.$parent.leapYear(dateArray[0]))
-      this.$parent.initalCalendar(rechoose.year, rechoose.month, rechoose.date, rechoose.weekday)
+      this.$child.initalCalendar(rechoose.year, rechoose.month, rechoose.date, rechoose.weekday)
     },
     getWeekday (year, month, date) {
       date = new Date(year, month, date)
@@ -110,30 +106,52 @@ export default {
   padding: 0 16px;
   background-color: #fff;
 
-  .find {
-    font-size: 16px;
-    color: $lightGray;
+  .callSidebar {
+    cursor: pointer;
+    opacity: 0.7;
+    margin: 10px 0;
+    border-radius: 5px;
+    padding: 6px;
+    border: 1px $lightGreen solid;
+
+    .menu-icon {
+      width: 20px;
+      height: 2px;
+      border-top: 2px solid $lightGreen;
+      border-bottom: 2px solid $lightGreen;
+      background-color: $lightGreen;
+      padding: 5px 0;
+      background-clip: content-box;
+    }
   }
 
-  .dateWrapper,
-  #selector {
-    top: 50%;
+  .dateWrapper {
+    cursor: pointer;
+    position: absolute;
+    top: 0px;
     left: 50%;
     font-size: 14px;
     overflow: hidden;
     position: absolute;
-    transform: translate3d(-50%, -50%, 0);
-  }
+    color: $lightGreen;
+    transform: translate3d(-50%, 0, 0);
 
-  #selector {
-    height: 40px;
-    width: 80px;
-    opacity: 0;
-    transform: translate3d(-43px, -50%, 0);
+    Calendar {
+      position: absolute;
+      top: 90px;
+      left: 50%;
+    }
   }
 
   .right {
     font-size: 14px;
+    color: $lightGray;
+
+    .find,
+    .favorite {
+      cursor: pointer;
+      margin-right: 30px;
+    }
 
     & > em {
       font-size: 14px;

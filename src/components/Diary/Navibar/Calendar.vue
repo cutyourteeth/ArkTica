@@ -1,60 +1,57 @@
 <template>
   <div class="calendar">
-    <!-- <Header :chosen="chosen" :today="today"></Header> -->
-    <div class="calendarWrapper">
-      <!-- 展开日历   -->
-      <div class="expanded" v-if="!miniModel">
-        <ul class="weekdays">
-          <li v-for="(item,key) in weekdayList" :key="key">{{item}}</li>
-        </ul>
-        <ul class="calendarDates">
-          <li
-            v-for="(item,key) in days"
-            :key="key"
-            :class="{selected:item.selected, gray:item.month!=='current'}"
-            class="day"
-            @click="check(key);setSelected()"
-          >
-            <div>{{item.day}}</div>
-            <div v-if="item.hasEvent" class="dot">●</div>
-          </li>
-        </ul>
-      </div>
-    </div>
+    <!-- 展开日历  -->
+    <ul class="weekdays">
+      <li v-for="(item,key) in weekdayList" :key="key">{{item}}</li>
+    </ul>
+    <ul class="calendarDates">
+      <li
+        v-for="(item,key) in days"
+        :key="key"
+        :class="{selected:item.selected, gray:item.month!=='current'}"
+        class="day"
+        @click="check(key);setSelected()"
+      >
+        <div>{{item.day}}</div>
+        <div v-if="item.hasEvent" class="dot">●</div>
+      </li>
+    </ul>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-
 export default {
+  props: {
+    today: {
+      type: Object,
+      default () {
+        return {
+          year: '',
+          month: '',
+          date: '',
+          weekday: '',
+          leapYear: false
+        }
+      }
+    },
+    chosen: {
+      type: Object,
+      default () {
+        return {
+          year: '',
+          month: '',
+          date: '',
+          weekday: '',
+          leapYear: false
+        }
+      }
+    }
+  },
   data () {
     return {
       weekdayList: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-      today: {
-        year: '',
-        month: '',
-        date: '',
-        weekday: '',
-        leapYear: false
-      },
-      chosen: {
-        year: '',
-        month: '',
-        date: '',
-        weekday: '',
-        leapYear: false
-      },
-      days: [],
-      daysMini: []
+      days: []
     }
-  },
-  mounted () {
-    let localTime = new Date()
-    this.chosen.year = this.today.year = localTime.getFullYear()
-    this.chosen.month = this.today.month = localTime.getMonth() + 1
-    this.chosen.date = this.today.date = localTime.getDate()
-    this.chosen.weekday = this.today.weekday = localTime.getDay()
-    this.initalCalendar(this.today.year, this.today.month, this.today.date, this.today.weekday)
   },
   methods: {
     leapYear (year) {
@@ -79,8 +76,8 @@ export default {
       }
     },
     initalCalendar (year, month, date, weekday) {
+      if (!year || !month || !date || !weekday) return console.log('未取得日期')
       this.days = []
-      this.daysMini = []
       let feb = 28
       this.leapYear(year) === 1 ? feb = 29 : feb = 28
       const datesMap = [31, feb, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
@@ -132,20 +129,8 @@ export default {
           this.days.push(new this.CreateDate(i + 1, weekday, 'next', false))
         }
       }
-      // 生成小日历
-      let dateMini = this.chosen.date
-      let weekdayMini = this.chosen.weekday
-      let index
-      // 获得本月本日在大日历中的index
-      for (let i = 0; i < this.days.length; i++) {
-        if (this.days[i].month === 'current' && this.days[i].day === dateMini) {
-          index = i
-        }
-      }
-      for (let i = (index - weekdayMini); i < (index - weekdayMini + 7); i++) {
-        this.daysMini.push(this.days[i])
-      }
     },
+    // 第一次选中本日
     setSelected () {
       this.days.forEach(item => {
         if (item.month === 'current' && item.day === this.chosen.date) item.selected = true
@@ -167,20 +152,16 @@ export default {
         if (this.chosen.month === 1) {
           this.chosen.month = 12
           --this.chosen.year
-          this.initalCalendar(this.chosen.year, this.chosen.month, this.chosen.date, this.chosen.weekday)
         } else {
           --this.chosen.month
-          this.initalCalendar(this.chosen.year, this.chosen.month, this.chosen.date, this.chosen.weekday)
         }
         // 下月跳转:根据12月为边界条件
       } else if (this.days[key].month === 'next') {
         if (this.chosen.month === 12) {
           this.chosen.month = 1
           ++this.chosen.year
-          this.initalCalendar(this.chosen.year, this.chosen.month, this.chosen.date, this.chosen.weekday)
         } else {
           ++this.chosen.month
-          this.initalCalendar(this.chosen.year, this.chosen.month, this.chosen.date, this.chosen.weekday)
         }
       } else {
         console.error('can\'t get month.attr')
@@ -194,6 +175,22 @@ export default {
       this.chosen.weekday = localTime.getDay()
       this.initalCalendar(this.today.year, this.today.month, this.today.date, this.today.weekday)
     }
+  },
+  mounted () {
+  },
+  watch: {
+    'today': {
+      handler: function () {
+        this.initalCalendar(this.today.year, this.today.month, this.today.date, this.today.weekday)
+      },
+      deep: true
+    },
+    'chosen': {
+      handler: function () {
+        this.initalCalendar(this.chosen.year, this.chosen.month, this.chosen.date, this.chosen.weekday)
+      },
+      deep: true
+    }
   }
 }
 </script>
@@ -203,101 +200,50 @@ export default {
 
 .calendar {
   width: 100%;
-  min-height: 65px;
-  line-height: 65px;
-  background-color: $milkWhite;
+  padding: 0px 0;
+  background-color: $lightGreen;
+  color: #fff;
+  text-align: center;
 
-  .calendarWrapper {
-    width: 100%;
-    padding: 0px 0;
+  &::before {
+    content: " ";
+    position: absolute;
+    left: 50%;
+    width: 20px;
+    height: 20px;
     background-color: $lightGreen;
-    color: #fff;
-    text-align: center;
+  }
+  .calendarDates {
+    cursor: pointer;
+  }
 
-    .mini {
-      width: 100%;
+  & > ul {
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
 
-      .calendarDatesMini {
-        width: 100%;
-        display: flex;
-        flex-flow: row nowrap;
-        align-items: flex-start;
-        background-color: $milkWhite;
+    & > li {
+      display: inline-block;
+      height: 41px;
+      line-height: 41px;
+      position: relative;
+      flex-basis: 14.285%;
+      font-size: 12px;
 
-        .dayMini {
-          position: relative;
-          flex-basis: 14.285%;
-          height: 60px;
-          background-color: rgb(248, 248, 248);
-          color: black;
-          text-align: center;
-          box-sizing: border-box;
-
-          .weekdayMini {
-            width: 100%;
-            margin-top: 12px;
-            font-size: 12px;
-            line-height: 12px;
-            height: 12px;
-            color: $lightGray;
-          }
-
-          .dayItemMini {
-            margin-top: 8px;
-            font-size: 12px;
-            line-height: 12px;
-          }
-
-          .luna {
-            line-height: 12px;
-            font-size: 12px;
-          }
-        }
-
-        .selected {
-          background-color: $lightGreen;
-
-          & > * {
-            color: #fff !important;
-          }
-
-          .dot {
-            color: $lightGreen;
-          }
-        }
+      .dot {
+        position: absolute;
+        top: 80%;
+        left: 50%;
+        transform: translate3d(-50%, -50%, 0) scale(0.8);
       }
     }
 
-    .expanded {
-      & > ul {
-        width: 100%;
-        display: flex;
-        flex-flow: row wrap;
+    .selected {
+      color: #000;
+      background-color: #fff;
 
-        & > li {
-          display: inline-block;
-          height: 41px;
-          line-height: 41px;
-          position: relative;
-          flex-basis: 14.285%;
-          font-size: 12px;
-
-          .dot {
-            position: absolute;
-            top: 80%;
-            left: 50%;
-            transform: translate3d(-50%, -50%, 0) scale(0.8);
-          }
-        }
-
-        .selected {
-          color: #000;
-          background-color: #fff;
-
-          .dot {
-            color: $lightGreen;
-          }
-        }
+      .dot {
+        color: $lightGreen;
       }
     }
   }
