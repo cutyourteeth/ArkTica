@@ -1,8 +1,7 @@
 <template>
   <div class="feed">
     <div v-if="!!feed.images.length" class="images" ref="images">
-      <!-- <a @click="imageExpand"></a> -->
-      <img v-for="(image,key) in feed.images" :key="key" :src="image" alt>
+      <Carousel class="feedImages" :background="feed.images" :miniModel="true"></Carousel>
       <!-- <Modal class="expanded"></modal> -->
     </div>
     <article>
@@ -23,6 +22,8 @@
 </template>
 
 <script type="text/ecmascript-6">
+import Carousel from '@/components/Core/Carousel'
+// import { addClass } from '@/common/js/utils.js'
 export default {
   props: {
     feed: {
@@ -45,35 +46,52 @@ export default {
     return {
     }
   },
-  methods: {
-    resizeThumb(){ // 重置显示模式
-      let images = this.$refs.images
-      images.forEach(image => {
-        image.hegiht
-      });
-    }
+  components: {
+    Carousel
   },
+  methods: {
+    // resizeThumb () { // 重置显示模式
+    //   let images = this.$refs.images
+    //   for (let i = 0; i < images.length; i++) {
+    //     const image = images[i]
+    //     const scale = (image.width / image.height).toFixed(1)
+    //     if (scale > 2) addClass(image, 'wide')
+    //     else addClass(image, 'tall')
+    //   }
+    // }
+  }
 }
 </script>
 
 <style scoped lang="scss">
 @import "../../../common/scss/mixin.scss";
 .feed {
-  width: 85%;
+  width: 300px;
   margin: 10px auto 30px;
   min-height: 300px;
   background-color: gray;
 
   .images {
     display: flex;
+    position: relative;
     flex-flow: row nowrap;
-    width: 100%;
+    width: 300px;
     border-bottom: 1px white solid;
     height: 140px;
+    overflow: hidden;
+    justify-content: flex-start;
 
     & > img {
-      width: 100%;
-      justify-content: flex-start;
+      width: 300px;
+      height: 1;
+      .tall {
+        width: 100%;
+        height: auto;
+      }
+      .height {
+        height: 100%;
+        width: auto;
+      }
     }
   }
   .date {

@@ -1,6 +1,6 @@
 <template>
   <div class="curtainWrapper">
-    <Carousel :theme="theme"></Carousel>
+    <Carousel :background="theme.background"></Carousel>
     <div class="slogan">
       <h1>Ark-Tica</h1>
       <h2>{{theme.text}}</h2>
@@ -10,7 +10,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-import Carousel from './Carousel'
+import Carousel from '@/components/Core/Carousel'
 export default {
   props: {
     theme: {

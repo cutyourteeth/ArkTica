@@ -54,4 +54,13 @@ export default {
 </script>
 
 <style>
+/* body {
+  display: flex;
+  justify-content: center;
+}
+#app {
+  width: 100%;
+  min-width: 320px;
+  max-width: 1920px;
+} */
 </style>

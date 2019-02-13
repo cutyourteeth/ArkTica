@@ -1,8 +1,21 @@
 // 封装js
-const getById = (id) => typeof id === 'string' ? document.getElementById(id) : id
-const getByClass = (className) => typeof className === 'string' ? document.getElementsByclass(className) : className
+function hasClass (ele, cls) {
+  ele.className.match(new RegExp('(\\s|^' + cls + '(\\s|$'))
+}
+
+var addClass = function (ele, cls) {
+  if (!hasClass(ele, cls)) return
+  ele.className += ' ' + cls
+  ele.className = ele.className.trim()
+}
+
+var rmClass = function (ele, cls) {
+  if (hasClass(ele, cls)) {
+    ele.className.replace(new RegExp('(\\s|^)' + cls + '(\\s|$)'), '')
+  }
+}
 
 export default {
-  getById,
-  getByClass
+  rmClass,
+  addClass
 }
