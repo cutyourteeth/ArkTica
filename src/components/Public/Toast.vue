@@ -1,29 +1,28 @@
 <template>
-  <div class="toast" ref="toast" v-if="live">{{toast.text}}</div>
+  <div class="toast" ref="toast" v-show="live">{{toast.text}}</div>
 </template>
 
 <script type="text/ecmascript-6">
 import store from '@/common/js/store.js'
 export default {
   props: {
-    toast: {
+  },
+  store,
+  data () {
+    return {
+      live: false,
       type: Object,
       default () {
         return {
-          text: '',
-          duration: 3000,
-          bgColor: ''
+          text: this.$store.state.toast.text,
+          duration: this.$store.state.toast.duration,
+          bgColor: this.$store.state.toast.bgColor
         }
       }
     }
   },
-  data () {
-    return {
-      live: false
-    }
-  },
   watch: {
-    'toast.text': function () {
+    '$store.state.toast': function () {
       if (this.toast.text) this.pop(this.toast.text, this.toast.duration, this.toast.bgColor)
     }
   },
@@ -35,6 +34,12 @@ export default {
       this.live = true
       setTimeout(function () {
         this.live = false
+        const newToast = {
+          text: '',
+          duration: 3000,
+          bgColor: ''
+        }
+        this.$store.commit('addToast', newToast)
       }, duration)
     }
   }

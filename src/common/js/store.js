@@ -14,10 +14,10 @@ let state = {
 
 // mutations 放置主要方法
 let mutations = {
-  addToast (text, duration = 3000, bgColor = 'rgba(0,0,0,0.6)') {
-    state.toast.text = text
-    state.toast.duration = duration
-    state.toast.bgColor = bgColor
+  addToast (state, newToast) {
+    state.toast.text = newToast.text
+    state.toast.duration = newToast.duration
+    state.toast.bgColor = newToast.bgColor
   }
 }
 

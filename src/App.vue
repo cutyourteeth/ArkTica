@@ -3,8 +3,8 @@
     <Curtain :theme="theme"></Curtain>
     <Diary></Diary>
     <!-- 浮层 -->
-    <Toast :toast="store.state.toast"></Toast>
-    <Modal :modal="modal"></Modal>
+    <Toast ></Toast>
+    <Modal ></Modal>
   </div>
 </template>
 

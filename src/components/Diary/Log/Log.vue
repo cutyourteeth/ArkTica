@@ -35,6 +35,11 @@ export default {
         folder: '',
         gametime: '',
         time: ''
+      },
+      warnToast: {
+        text: 'Please select a folder',
+        duration: 3000,
+        bgColor: 'rgba(255, 0, 0, 0.3)'
       }
     }
   },
@@ -42,7 +47,7 @@ export default {
   methods: {
     uploadCheck () {
       // 测试toast
-      this.$store.commit('addToast', 'testing')
+      this.$store.commit('addToast', this.warnToast)
     }
   },
   components: {
