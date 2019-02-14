@@ -82,17 +82,6 @@ export default {
   flex-flow: row nowrap;
   overflow: hidden;
   list-style: none;
-  &::before {
-    content: " ";
-    height: 100%;
-    width: 100%;
-    background-image: url("//img0.ph.126.net/-7Hk6njU8AF24z5yHFApuA==/1668865137018202872.jpg");
-    background-position: center center;
-    background-size: 1100% 100%;
-    background-repeat: no-repeat;
-    z-index: 0;
-    filter: blur(20px);
-  }
   .bgImage {
     position: absolute;
     top: 50%;
@@ -101,6 +90,11 @@ export default {
     width: auto;
     height: 110%;
     filter: blur(5px);
+    // 宽、带鱼屏适配
+    @media screen and (min-width: 1920px) and (min-height: 900px) {
+      width: 110%;
+      height: auto;
+    }
   }
   .left,
   .right {

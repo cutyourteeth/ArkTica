@@ -1,17 +1,19 @@
 <template>
-  <div class="style."></div>
+ <div class='style.'>
+
+ </div>
 </template>
 
 <script type="text/ecmascript-6">
 export default {
-  data () {
-    return {
+ data() {
+ return {
 
-    }
-  },
-  components: {
+ }
+ },
+ components: {
 
-  }
+ }
 }
 </script>
 

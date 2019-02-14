@@ -3,7 +3,9 @@
     <h2 class="logTitle">theme.logTitle</h2>
     <form class="note">
       <label for="folder">
-        <select name="folder" class="folderSelector"></select>
+        <select name="folder" class="folderSelector">
+          <option>create a new folder</option>
+        </select>
       </label>
       <label for="log">
         <textarea name="log" class="logArea"></textarea>
@@ -13,15 +15,34 @@
       <div class="imageArray">
         <div class="imageRect"></div>
       </div>
-      <a class="logSubmit">Submit</a>
+      <a class="logSubmit" @click="uploadCheck">Submit</a>
     </form>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
+import store from '@/common/js/store.js'
+
 export default {
   data () {
     return {
+      newLog: {
+        id: '',
+        images: [],
+        date: '',
+        text: '',
+        mood: '',
+        folder: '',
+        gametime: '',
+        time: ''
+      }
+    }
+  },
+  store,
+  methods: {
+    uploadCheck () {
+      // 测试toast
+      this.$store.commit('addToast', 'testing')
     }
   },
   components: {

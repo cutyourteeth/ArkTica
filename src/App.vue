@@ -2,12 +2,18 @@
   <div id="app">
     <Curtain :theme="theme"></Curtain>
     <Diary></Diary>
+    <!-- 浮层 -->
+    <Toast :toast="store.state.toast"></Toast>
+    <Modal :modal="modal"></Modal>
   </div>
 </template>
 
 <script>
+import store from '@/common/js/store.js'
 import Curtain from '@/components/Curtain/Curtain'
 import Diary from '@/components/Diary/Diary'
+import Toast from '@/components/Public/Toast'
+import Modal from '@/components/Public/Modal'
 
 export default {
   name: 'App',
@@ -19,12 +25,20 @@ export default {
         string: ``
       },
       themes: {},
-      theme: {}
+      theme: {},
+      toast: {
+        text: '',
+        duration: 3000,
+        bgColor: ''
+      }
     }
   },
+  store,
   components: {
     Curtain,
-    Diary
+    Diary,
+    Toast,
+    Modal
   },
   computed: {
   },

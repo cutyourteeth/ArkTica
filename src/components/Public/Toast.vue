@@ -1,8 +1,9 @@
 <template>
-  <div class="toast" ref="toast">{{toast.text}}</div>
+  <div class="toast" ref="toast" v-if="live">{{toast.text}}</div>
 </template>
 
 <script type="text/ecmascript-6">
+import store from '@/common/js/store.js'
 export default {
   props: {
     toast: {
@@ -10,7 +11,7 @@ export default {
       default () {
         return {
           text: '',
-          duration: 0.6,
+          duration: 3000,
           bgColor: ''
         }
       }
@@ -18,18 +19,25 @@ export default {
   },
   data () {
     return {
+      live: false
+    }
+  },
+  watch: {
+    'toast.text': function () {
+      if (this.toast.text) this.pop(this.toast.text, this.toast.duration, this.toast.bgColor)
     }
   },
   methods: {
-    toast (text, duration, bgColor) {
+    pop (text, duration, bgColor) {
       const wrapper = this.$refs.toast
-
-      wrapper.style.display = 'block'
       wrapper.style.backgroundColor = bgColor
-      setTimeout
-      return this.toast
+      wrapper.innerText = text
+      this.live = true
+      setTimeout(function () {
+        this.live = false
+      }, duration)
     }
-  },
+  }
 }
 </script>
 

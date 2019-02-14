@@ -50,15 +50,7 @@ export default {
     Carousel
   },
   methods: {
-    // resizeThumb () { // 重置显示模式
-    //   let images = this.$refs.images
-    //   for (let i = 0; i < images.length; i++) {
-    //     const image = images[i]
-    //     const scale = (image.width / image.height).toFixed(1)
-    //     if (scale > 2) addClass(image, 'wide')
-    //     else addClass(image, 'tall')
-    //   }
-    // }
+
   }
 }
 </script>
@@ -66,18 +58,19 @@ export default {
 <style scoped lang="scss">
 @import "../../../common/scss/mixin.scss";
 .feed {
-  width: 300px;
+  width: 85%;
   margin: 10px auto 30px;
   min-height: 300px;
   background-color: gray;
+  text-align: left;
 
   .images {
     display: flex;
     position: relative;
     flex-flow: row nowrap;
-    width: 300px;
+    width: 100%;
     border-bottom: 1px white solid;
-    height: 140px;
+    height: 270px;
     overflow: hidden;
     justify-content: flex-start;
 
@@ -94,36 +87,39 @@ export default {
       }
     }
   }
-  .date {
-    height: 40px;
-    line-height: 40px;
-    color: $lightGreen;
-    font-size: 20px;
-    font-weight: 500;
-  }
-  .text {
-    margin: 20px 0;
-    font-size: 16px;
-    line-height: 1.5;
-  }
-  .footer {
-    display: flex;
-    height: 20;
-    flex-flow: row nowrap;
-    justify-content: space-between;
-    padding: 5px 10px;
-    font-size: 14px;
-    .left {
-      .mood {
-        font-size: 14px;
-      }
-      .folder {
-        font-size: 14px;
-      }
+  article {
+    padding: 10px 20px;
+    .date {
+      height: 40px;
+      line-height: 40px;
+      color: $lightGreen;
+      font-size: 20px;
+      font-weight: 500;
     }
-    .right {
-      .time {
-        font-size: 14px;
+    .text {
+      margin: 20px 0;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+    .footer {
+      display: flex;
+      height: 20;
+      flex-flow: row nowrap;
+      justify-content: space-between;
+      padding: 5px 10px;
+      font-size: 14px;
+      .left {
+        .mood {
+          font-size: 14px;
+        }
+        .folder {
+          font-size: 14px;
+        }
+      }
+      .right {
+        .time {
+          font-size: 14px;
+        }
       }
     }
   }
