@@ -21,22 +21,23 @@ export default {
       }
     }
   },
+  // 停止请求http
   watch: {
     '$store.state.toast': function () {
       if (this.toast.text) this.pop(this.toast.text, this.toast.duration, this.toast.bgColor)
     }
   },
   methods: {
-    pop (text, duration, bgColor) {
+    pop (text, duration, bgColor="rgba(0,0,0,0.7)") {
       const wrapper = this.$refs.toast
       wrapper.style.backgroundColor = bgColor
       wrapper.innerText = text
       this.live = true
-      setTimeout(function () {
+      setTimeout(() => {
         this.live = false
         const newToast = {
           text: '',
-          duration: 3000,
+          duration: 2000,
           bgColor: ''
         }
         this.$store.commit('addToast', newToast)
