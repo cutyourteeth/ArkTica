@@ -23,7 +23,6 @@ const useEditor = () => {
   const setters = useMemo(
     () => ({
       changeQuillValue(value: string) {
-        console.log(value)
         setEditorStore(s => {
           const updatedState = { ...s }
           updatedState.quillValue = value

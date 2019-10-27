@@ -2,9 +2,11 @@ import { useState, useMemo } from 'react'
 
 export interface ILog {
   content: string
+  date: Date
+  id: number | string
 }
 
-const emptyLogArray: ILog[] = [{ content: '' }]
+const emptyLogArray: ILog[] = [{ content: '', id: 0, date: new Date() }]
 const emptyAppStore = {
   logs: emptyLogArray
 }
@@ -18,6 +20,16 @@ const useApp = () => {
         setAppStore(s => {
           const updatedState = { ...s }
           updatedState.logs = logs
+          return updatedState
+        })
+      },
+
+      addLog(log: ILog) {
+          console.log(appStore.logs);
+          
+        setAppStore(s => {
+          const updatedState = { ...s }
+          updatedState.logs.push(log)
           return updatedState
         })
       }

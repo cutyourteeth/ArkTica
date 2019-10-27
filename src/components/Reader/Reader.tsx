@@ -1,32 +1,14 @@
 import React from 'react'
 import Panel from '../core/Panel'
+import useApp from '../store/useApp'
 
 const Reader = () => {
-  const fakeList = [
-    {
-      id: 0,
-      content: 'mnoisd',
-      date: '123123'
-    },
-    {
-      id: 1,
-      content: 'mnoisd',
-      date: '123123'
-    },
-    {
-      id: 2,
-      content: 'mnoisd',
-      date: '123123'
-    },
-    {
-      id: 3,
-      content: 'mnoisd',
-      date: '123123'
-    }
-  ]
+  const [appStore,]=useApp()
+  console.log(appStore);
+  
   return (
     <div>
-      {fakeList.map(item => {
+      {appStore.logs.map(item => {
         return <Panel key={item.id} content={item.content} date={item.date} />
       })}
     </div>

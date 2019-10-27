@@ -3,23 +3,26 @@ import { Button } from 'antd'
 import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
 import useEditor, { IEditorStore } from '../store/useEditor'
+import useApp from '../store/useApp'
 
 const Editor = () => {
   const [editorStore, setters] = useEditor()
   const { quillConfig, quillValue } = editorStore as IEditorStore
   const { changeQuillValue, resetQuillValue } = setters
 
+  const [, appSetters] = useApp()
+  const { addLog } = appSetters
+
   const handleUpload = () => {
     storeLogToLocal()
     resetQuillValue()
   }
 
-  const storeLogToLocal = async():Promise<boolean> => {
-    return new Promise(()=>{
-      
-      return true
-    })
-
+  const storeLogToLocal = () => {
+    console.log(12312);
+    
+    const newLog = { content: quillValue, id: (Math.random() * 100).toFixed(2), date: new Date() }
+    addLog(newLog)
   }
 
   return (

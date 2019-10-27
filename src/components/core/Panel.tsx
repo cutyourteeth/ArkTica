@@ -7,10 +7,10 @@ interface IProps {
 const Panel = (props: IProps) => {
   return (
     <div>
-      <div>fake content</div>
+      <div>{props.content}</div>
       <div>
         <span> fake subtitle</span>
-        <span> fake date</span>
+        <span> {props.date.toString()}</span>
       </div>
     </div>
   )
