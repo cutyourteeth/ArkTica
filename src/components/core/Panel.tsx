@@ -1,11 +1,10 @@
-import React from "react";
+import React from 'react'
 
 interface IProps {
-  content: React.ReactElement | string;
-  date: Date | string;
+  content: React.ReactElement | string
+  date: Date | string
 }
 const Panel = (props: IProps) => {
-    
   return (
     <div>
       <div>fake content</div>
@@ -14,7 +13,7 @@ const Panel = (props: IProps) => {
         <span> fake date</span>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Panel;
+export default Panel
