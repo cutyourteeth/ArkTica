@@ -10,7 +10,16 @@ const Editor = () => {
   const { changeQuillValue, resetQuillValue } = setters
 
   const handleUpload = () => {
+    storeLogToLocal()
     resetQuillValue()
+  }
+
+  const storeLogToLocal = async():Promise<boolean> => {
+    return new Promise(()=>{
+      
+      return true
+    })
+
   }
 
   return (
