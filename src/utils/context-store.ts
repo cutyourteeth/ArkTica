@@ -5,27 +5,22 @@ import React from 'react'
  * @param {*} defaultValue 传入默认的上下文value
  * @returns {} Store
  */
+
 function createContextStore(createValue: (prop: any) => any) {
   let Context = React.createContext(null)
 
-  let Provider = function(node: any) {
-    return React.createElement(Context.Provider, { value: createValue(node) }, node.children)
+  let Provider = function(value: any) {
+    return React.createElement(Context.Provider, { value: createValue(value) },value.children)
   }
 
-  let useStateController = function() {
-    let v = React.useContext(Context)
-    console.log(v)
-    if (v) {
-      return v
-    }
-    throw new Error('Missing <.Provider>')
+  let Store = function() {
+    let s = React.useContext(Context)
+    return s
   }
-
-  //   let Store = () => useContext(Context)
 
   // 在Store上, 注册Provider
-  Object.assign(useStateController, { Provider })
-  return useStateController
+  Object.assign(Store, { Provider })
+  return Store
 }
 
 /* 暴露的上下文存储 */
