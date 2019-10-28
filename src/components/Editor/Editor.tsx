@@ -3,7 +3,6 @@ import React from 'react'
 import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
 import { uuid } from '../../utils/global-utils'
-import useApp from '../store/useApp'
 import useEditor, { IEditorStore } from '../store/useEditor'
 
 const Editor = () => {
@@ -11,8 +10,8 @@ const Editor = () => {
   const { quillConfig, quillValue } = editorStore as IEditorStore
   const { changeQuillValue, resetQuillValue } = setters
 
-  const [, appSetters] = useApp()
-  const { addLog } = appSetters
+  // const [, appSetters] = useApp()
+  // const { addLog } = appSetters
 
   const handleUpload = () => {
     storeLogToLocal()
@@ -21,7 +20,7 @@ const Editor = () => {
 
   const storeLogToLocal = () => {
     const newLog = { content: quillValue, id: uuid(), date: new Date() }
-    addLog(newLog)
+    // addLog(newLog)
   }
 
   return (
