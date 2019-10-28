@@ -1,11 +1,20 @@
 import React from 'react'
+import { useHistory } from 'react-router-dom'
 import { HomeWrapper } from './style'
 
 const Home = () => {
+  const history = useHistory()
+  const toReader = () => {
+    history.push('/reader')
+  }
+  const toEditor = () => {
+    history.push('/editor')
+  }
+
   return (
     <HomeWrapper>
       <div className="container clearfix">
-        <div className="pa macbook hover">
+        <div className="pa macbook hover not-ready">
           <div className="screen">
             <div className="user_pic"></div>
             <div className="password"></div>
@@ -64,16 +73,19 @@ const Home = () => {
                 <div className="ftl key key1"></div>
               </div>
             </div>
-            <div className="touchpad"></div>
+            <div
+              className="
+            "
+            ></div>
             <div className="pa shadow"></div>
           </div>
         </div>
 
-        <div className="pa mouse hover">
+        <div className="pa mouse hover not-ready">
           <div className="pa scroller"></div>
         </div>
 
-        <div className="pa phone hover">
+        <div className="pa phone hover not-ready">
           <div className="speaker"></div>
           <div className="screen">
             <div className="screen_data"></div>
@@ -82,18 +94,18 @@ const Home = () => {
           <div className="pa volume_rockers"></div>
         </div>
 
-        <div className="pa notes hover">
+        <div className="pa notes hover not-ready">
           <div className="note pr"></div>
         </div>
 
-        <div className="pa pen hover">
+        <div className="pa pen hover not-ready">
           <div className="pen-nip">
             <div className="pen-tip"></div>
           </div>
           <div className="pa pen-bottom"></div>
         </div>
 
-        <div className="pa handwatch hover">
+        <div className="pa handwatch hover not-ready">
           <div className="pr">
             <div className="belt"></div>
             <div className="pa dial">
@@ -106,7 +118,7 @@ const Home = () => {
           </div>
         </div>
 
-        <div className="pa passbook hover">
+        <div className="pa passbook hover not-ready">
           <div className="pr symbol">
             <div className="pa h_line"></div>
             <div className="pa v_line"></div>
@@ -117,7 +129,7 @@ const Home = () => {
           <div className="details3"></div>
         </div>
 
-        <div className="pa diary hover">
+        <div className="pa diary hover" onClick={toReader}>
           <div className="main">
             <div className="cover">
               <div className="pa less"></div>
@@ -125,21 +137,21 @@ const Home = () => {
           </div>
         </div>
 
-        <div className="pa pencil hover">
+        <div className="pa pencil hover" onClick={toEditor}>
           <div className="pa pencil-bottom"></div>
           <div className="pencil-nip">
             <div className="pencil-tip"></div>
           </div>
         </div>
 
-        <div className="pa lock hover">
+        <div className="pa lock hover not-ready">
           <div className="handle"></div>
           <div className="pr locker">
             <div className="pa key_hole"></div>
           </div>
         </div>
 
-        <div className="pa mug hover">
+        <div className="pa mug hover not-ready">
           <div className="pr mug_head">
             <div className="pa coffee"></div>
             <div className="pa ear"></div>

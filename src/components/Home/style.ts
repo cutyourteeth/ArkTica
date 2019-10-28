@@ -2,6 +2,7 @@ import styled from 'styled-components'
 
 export const HomeWrapper = styled.div`
   background-color: #333;
+
   .clearfix:after {
     content: '.';
     display: block;
@@ -27,110 +28,118 @@ export const HomeWrapper = styled.div`
   .pad-lr-10 {
     padding: 0 10px;
   }
+  div {
+    transition: ease 0.2s;
+  }
+  .hover {
+    &:hover {
+      transform: scale(1.1, 1.1);
+      cursor: pointer;
+    }
+  }
+  .not-ready {
+    &:hover {
+      cursor: pointer;
+      opacity: 0.6;
+      transform: none;
+    }
+  }
+
   .macbook {
     left: 285px;
     top: 75px;
-  }
-  .macbook .screen {
-    height: 150px;
-    width: 250px;
-    background-color: #3c5996;
-    border: 10px solid #151822;
-    border-radius: 5px;
-  }
-  .macbook .screen .user_pic {
-    margin: 20px auto 15px auto;
-    height: 45px;
-    width: 45px;
-    border-radius: 50%;
-    background-color: #b1bdd5;
-  }
-  .macbook .screen .password {
-    background-color: #fff;
-    height: 15px;
-    width: 100px;
-    border-radius: 20px;
-    margin: 0 auto;
-  }
-  .macbook .screen .icons {
-    margin: 27px auto 0px auto;
-    width: 75px;
-  }
-  .macbook .screen .icons .icon {
-    height: 15px;
-    width: 15px;
-    border-radius: 50%;
-    background-color: #344c7f;
-    float: left;
-    margin: 0 5px;
-  }
-  .macbook .base {
-    height: 185px;
-    width: 270px;
-    background-color: #e8e8eb;
-    border-top-right-radius: 5px;
-    border-top-left-radius: 5px;
-    border-bottom-right-radius: 15px;
-    border-bottom-left-radius: 15px;
-    border-bottom: 8px solid #a6856e;
-  }
-  .macbook .base .connector {
-    background-color: #151822;
-    height: 8px;
-    width: 170px;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
-    margin: 0 auto;
-  }
-  .macbook .base .keypad {
-    background-color: #c2cbde;
-    height: 85px;
-    width: 250px;
-    margin: 10px auto;
-    border-radius: 5px;
-    padding: 3px;
-  }
-  .macbook .base .keypad .key {
-    height: 17px;
-    border-radius: 4px;
-    background-color: #151822;
-    margin: 2px;
-    /*box-shadow: 0px 2px 1px #6F7584;*/
-  }
-  .macbook .base .keypad .key1 {
-    width: 18px;
-  }
-  .macbook .base .keypad .key2 {
-    width: 32px;
-  }
-  .macbook .base .keypad .key3 {
-    width: 90px;
-  }
-  .macbook .base .touchpad {
-    background-color: #c2cbde;
-    height: 59px;
-    width: 100px;
-    border-radius: 5px;
-    margin: -5px auto 5px auto;
-  }
-  .macbook .base .shadow {
-    width: 100%;
-    height: 6px;
-    background-color: #c2cbde;
-    bottom: 0px;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
-  }
-  div {
-    -webkit-transition: ease 0.2s;
-    -moz-transition: ease 0.2s;
-    -ie-transition: ease 0.2s;
-    -o-transition: ease 0.2s;
-    transition: ease 0.2s;
-  }
-  .hover:hover {
-    /*margin-top: -7px;*/
-    transform: scale(1.1, 1.1);
+
+    .screen {
+      height: 150px;
+      width: 250px;
+      background-color: #3c5996;
+      border: 10px solid #151822;
+      border-radius: 5px;
+    }
+    .screen .user_pic {
+      margin: 20px auto 15px auto;
+      height: 45px;
+      width: 45px;
+      border-radius: 50%;
+      background-color: #b1bdd5;
+    }
+    .screen .password {
+      background-color: #fff;
+      height: 15px;
+      width: 100px;
+      border-radius: 20px;
+      margin: 0 auto;
+    }
+    .screen .icons {
+      margin: 27px auto 0px auto;
+      width: 75px;
+    }
+    .screen .icons .icon {
+      height: 15px;
+      width: 15px;
+      border-radius: 50%;
+      background-color: #344c7f;
+      float: left;
+      margin: 0 5px;
+    }
+
+    .base {
+      height: 185px;
+      width: 270px;
+      background-color: #e8e8eb;
+      border-top-right-radius: 5px;
+      border-top-left-radius: 5px;
+      border-bottom-right-radius: 15px;
+      border-bottom-left-radius: 15px;
+      border-bottom: 8px solid #a6856e;
+    }
+    .base .connector {
+      background-color: #151822;
+      height: 8px;
+      width: 170px;
+      border-bottom-left-radius: 5px;
+      border-bottom-right-radius: 5px;
+      margin: 0 auto;
+    }
+    .base .keypad {
+      background-color: #c2cbde;
+      height: 85px;
+      width: 250px;
+      margin: 10px auto;
+      border-radius: 5px;
+      padding: 3px;
+    }
+    .base .keypad .key {
+      height: 17px;
+      border-radius: 4px;
+      background-color: #151822;
+      margin: 2px;
+      box-shadow: 0px 2px 1px #6f7584;
+    }
+    .base .keypad .key1 {
+      width: 18px;
+    }
+    .base .keypad .key2 {
+      width: 32px;
+    }
+    .base .keypad .key3 {
+      width: 90px;
+    }
+    .base .touchpad {
+      background-color: #c2cbde;
+      height: 59px;
+      width: 100px;
+      border-radius: 5px;
+      margin: -5px auto 5px auto;
+    }
+    .base .shadow {
+      width: 100%;
+      height: 6px;
+      background-color: #c2cbde;
+      bottom: 0px;
+      border-bottom-left-radius: 5px;
+      border-bottom-right-radius: 5px;
+    }
   }
 
   .mouse {
