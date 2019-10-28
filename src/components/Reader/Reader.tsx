@@ -1,14 +1,11 @@
 import React from 'react'
 import Panel from '../core/Panel'
-import useApp from '../store/useApp'
+import { ILog } from '../store/useApp'
 
-const Reader = () => {
-  const [appStore,]=useApp()
-  console.log(appStore);
-  
+const Reader = (props: { logs: ILog[] }) => {
   return (
     <div>
-      {appStore.logs.map(item => {
+      {props.logs.map(item => {
         return <Panel key={item.id} content={item.content} date={item.date} />
       })}
     </div>

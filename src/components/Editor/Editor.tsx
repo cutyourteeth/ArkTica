@@ -1,9 +1,10 @@
-import React from 'react'
 import { Button } from 'antd'
+import React from 'react'
 import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
-import useEditor, { IEditorStore } from '../store/useEditor'
+import { uuid } from '../../utils/global-utils'
 import useApp from '../store/useApp'
+import useEditor, { IEditorStore } from '../store/useEditor'
 
 const Editor = () => {
   const [editorStore, setters] = useEditor()
@@ -19,9 +20,7 @@ const Editor = () => {
   }
 
   const storeLogToLocal = () => {
-    console.log(12312);
-    
-    const newLog = { content: quillValue, id: (Math.random() * 100).toFixed(2), date: new Date() }
+    const newLog = { content: quillValue, id: uuid(), date: new Date() }
     addLog(newLog)
   }
 

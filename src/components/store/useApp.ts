@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react'
+import { useMemo, useState } from 'react'
 
 export interface ILog {
   content: string
@@ -25,8 +25,6 @@ const useApp = () => {
       },
 
       addLog(log: ILog) {
-          console.log(appStore.logs);
-          
         setAppStore(s => {
           const updatedState = { ...s }
           updatedState.logs.push(log)
