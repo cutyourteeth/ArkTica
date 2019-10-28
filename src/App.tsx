@@ -1,16 +1,16 @@
-import './App.css'
 import React from 'react'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 import Editor from './components/Editor/Editor'
-import Reader from './components/Reader/Reader'
 import Home from './components/Home/Home'
+import Reader from './components/Reader/Reader'
 
 const App: React.FC = () => {
   return (
-    <div>
-      <Home />
-      <Editor />
-      <Reader />
-    </div>
+    <Router >
+      <Route component={Home} path="/" />
+      <Route component={Editor} path="/editor"/>
+      <Route component={Reader} path="/reader"/>
+    </Router>
   )
 }
 

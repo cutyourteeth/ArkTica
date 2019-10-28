@@ -5,7 +5,7 @@ const Home = () => {
   return (
     <HomeWrapper>
       <div className="container clearfix">
-        <div className="pa mackbook hover">
+        <div className="pa macbook hover">
           <div className="screen">
             <div className="user_pic"></div>
             <div className="password"></div>

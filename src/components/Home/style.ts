@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 
 export const HomeWrapper = styled.div`
+  background-color: #333;
   .clearfix:after {
     content: '.';
     display: block;
@@ -26,36 +27,36 @@ export const HomeWrapper = styled.div`
   .pad-lr-10 {
     padding: 0 10px;
   }
-  .mackbook {
+  .macbook {
     left: 285px;
     top: 75px;
   }
-  .mackbook .screen {
+  .macbook .screen {
     height: 150px;
     width: 250px;
     background-color: #3c5996;
     border: 10px solid #151822;
     border-radius: 5px;
   }
-  .mackbook .screen .user_pic {
+  .macbook .screen .user_pic {
     margin: 20px auto 15px auto;
     height: 45px;
     width: 45px;
     border-radius: 50%;
     background-color: #b1bdd5;
   }
-  .mackbook .screen .password {
+  .macbook .screen .password {
     background-color: #fff;
     height: 15px;
     width: 100px;
     border-radius: 20px;
     margin: 0 auto;
   }
-  .mackbook .screen .icons {
+  .macbook .screen .icons {
     margin: 27px auto 0px auto;
     width: 75px;
   }
-  .mackbook .screen .icons .icon {
+  .macbook .screen .icons .icon {
     height: 15px;
     width: 15px;
     border-radius: 50%;
@@ -63,7 +64,7 @@ export const HomeWrapper = styled.div`
     float: left;
     margin: 0 5px;
   }
-  .mackbook .base {
+  .macbook .base {
     height: 185px;
     width: 270px;
     background-color: #e8e8eb;
@@ -73,7 +74,7 @@ export const HomeWrapper = styled.div`
     border-bottom-left-radius: 15px;
     border-bottom: 8px solid #a6856e;
   }
-  .mackbook .base .connector {
+  .macbook .base .connector {
     background-color: #151822;
     height: 8px;
     width: 170px;
@@ -81,7 +82,7 @@ export const HomeWrapper = styled.div`
     border-bottom-right-radius: 5px;
     margin: 0 auto;
   }
-  .mackbook .base .keypad {
+  .macbook .base .keypad {
     background-color: #c2cbde;
     height: 85px;
     width: 250px;
@@ -89,30 +90,30 @@ export const HomeWrapper = styled.div`
     border-radius: 5px;
     padding: 3px;
   }
-  .mackbook .base .keypad .key {
+  .macbook .base .keypad .key {
     height: 17px;
     border-radius: 4px;
     background-color: #151822;
     margin: 2px;
     /*box-shadow: 0px 2px 1px #6F7584;*/
   }
-  .mackbook .base .keypad .key1 {
+  .macbook .base .keypad .key1 {
     width: 18px;
   }
-  .mackbook .base .keypad .key2 {
+  .macbook .base .keypad .key2 {
     width: 32px;
   }
-  .mackbook .base .keypad .key3 {
+  .macbook .base .keypad .key3 {
     width: 90px;
   }
-  .mackbook .base .touchpad {
+  .macbook .base .touchpad {
     background-color: #c2cbde;
     height: 59px;
     width: 100px;
     border-radius: 5px;
     margin: -5px auto 5px auto;
   }
-  .mackbook .base .shadow {
+  .macbook .base .shadow {
     width: 100%;
     height: 6px;
     background-color: #c2cbde;
