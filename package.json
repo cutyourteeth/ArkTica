@@ -2,6 +2,7 @@
   "name": "ark-tica",
   "version": "0.1.0",
   "private": true,
+  "main":"main.js",
   "dependencies": {
     "@types/antd": "^1.0.0",
     "@types/jest": "^24.0.19",
@@ -28,7 +29,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "git-up": "git add .&&git commit -m 'auto-commit'&&git push"
+    "git-up": "git add .&&git commit -m 'auto-commit'&&git push",
+    "electron": "electron ."
   },
   "eslintConfig": {
     "extends": "react-app"

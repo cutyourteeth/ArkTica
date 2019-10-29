@@ -1,20 +1,22 @@
 import styled from 'styled-components'
 
 export const HomeWrapper = styled.div`
-  background-color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-  .clearfix:after {
+  /* .clearfix:after {
     content: '.';
     display: block;
     clear: both;
     visibility: hidden;
     line-height: 0 !important;
     height: 0;
-  }
+  } */
   .container {
     position: relative;
     margin: 2% auto 0 auto;
-    width: 900px;
+    width: 880px;
   }
   .pr {
     position: relative;

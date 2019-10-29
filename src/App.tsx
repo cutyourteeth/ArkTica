@@ -7,10 +7,11 @@ import useApp from './components/store/useApp'
 
 const App: React.FC = () => {
   const AppStore = useApp() as any
-  console.log(useApp);
-  
+  console.log(useApp)
+
   return (
-    <AppStore.Provider>
+    // <AppStore.Provider>
+    <div>
       <Router>
         <Switch>
           <Route path="/" exact={true}>
@@ -24,7 +25,8 @@ const App: React.FC = () => {
           </Route>
         </Switch>
       </Router>
-    </AppStore.Provider>
+    </div>
+    // </AppStore.Provider>
   )
 }
 
