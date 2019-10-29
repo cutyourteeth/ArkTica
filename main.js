@@ -2,12 +2,36 @@
 const { app, BrowserWindow } = require('electron')
 const path = require('path')
 const url = require('url')
+const Store = require('electron-store')
+
+// handle Storage file
+// const schema = {
+//   log:{}
+// }
+const store = new Store({
+  cwd:''
+});
+
+store.set('unicorn', '🦄');
+console.log(store.get('unicorn'));
+//=> '🦄'
+
+// Use dot-notation to access nested properties
+store.set('foo.bar', true);
+// console.log(store.get('foo'));
+//=> {bar: true}
+
+// store.delete('unicorn');
+// console.log(store.get('unicorn'));
+//=> undefined
+
+// app.getPath()
 
 // 保持window对象的全局引用,避免JavaScript对象被垃圾回收时,窗口被自动关闭.
 let mainWindow
 
 function createWindow() {
-  mainWindow = new BrowserWindow({ width: 880, height: 640 })
+  mainWindow = new BrowserWindow({ width: 880, height: 640,frame:false, })
 
   // 加载应用----适用于 react 项目
   mainWindow.loadURL('http://localhost:3000/')
