@@ -7,7 +7,7 @@ import useApp from './components/store/useApp'
 
 const App: React.FC = () => {
   const AppStore = useApp() as any
-  console.log(useApp)
+  console.log(AppStore)
 
   return (
     // <AppStore.Provider>
