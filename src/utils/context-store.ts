@@ -5,12 +5,11 @@ import React from 'react'
  * @param {*} defaultValue 传入默认的上下文value
  * @returns {} Store
  */
-
-function createContextStore(createValue: (prop: any) => any) {
+function createContextStore<T, U>(createValue: (prop: T) => U): { (): U; Provider: React.FC<T> } {
   let Context = React.createContext(null)
 
   let Provider = function(value: any) {
-    return React.createElement(Context.Provider, { value: createValue(value) },value.children)
+    return React.createElement(Context.Provider, { value: createValue(value) }, value.children)
   }
 
   let Store = function() {

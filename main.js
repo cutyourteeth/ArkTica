@@ -8,16 +8,16 @@ const Store = require('electron-store')
 // const schema = {
 //   log:{}
 // }
-const store = new Store({
-  cwd:''
-});
+// const store = new Store({
+// cwd:''
+// });
 
-store.set('unicorn', '🦄');
-console.log(store.get('unicorn'));
+// store.set('unicorn', '🦄');
+// console.log(store.get('unicorn'));
 //=> '🦄'
 
 // Use dot-notation to access nested properties
-store.set('foo.bar', true);
+// store.set('foo.bar', true);
 // console.log(store.get('foo'));
 //=> {bar: true}
 
@@ -31,17 +31,17 @@ store.set('foo.bar', true);
 let mainWindow
 
 function createWindow() {
-  mainWindow = new BrowserWindow({ width: 880, height: 640,frame:false, })
+  mainWindow = new BrowserWindow({ width: 880, height: 640, frame: true })
 
   // 加载应用----适用于 react 项目
   mainWindow.loadURL('http://localhost:3000/')
-//   mainWindow.loadURL(
-//     url.format({
-//       pathname: path.join(__dirname, 'index.html'),
-//       protocol: 'file:',
-//       slashes: true
-//     })
-//   )
+  //   mainWindow.loadURL(
+  //     url.format({
+  //       pathname: path.join(__dirname, 'index.html'),
+  //       protocol: 'file:',
+  //       slashes: true
+  //     })
+  //   )
 
   // 打开开发者工具，默认不打开
   mainWindow.webContents.openDevTools()
