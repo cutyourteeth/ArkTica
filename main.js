@@ -1,5 +1,5 @@
 // 引入electron并创建一个BrowserWindow
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow, ipcMain } = require('electron')
 const path = require('path')
 const url = require('url')
 const Store = require('electron-store')
@@ -8,16 +8,16 @@ const Store = require('electron-store')
 // const schema = {
 //   log:{}
 // }
-// const store = new Store({
-// cwd:''
-// });
+const store = new Store({
+  cwd: ''
+})
 
-// store.set('unicorn', '🦄');
-// console.log(store.get('unicorn'));
+store.set('unicorn', '🦄')
+console.log(store.get('unicorn'))
 //=> '🦄'
 
 // Use dot-notation to access nested properties
-// store.set('foo.bar', true);
+store.set('foo.bar', true)
 // console.log(store.get('foo'));
 //=> {bar: true}
 
@@ -34,7 +34,7 @@ function createWindow() {
   mainWindow = new BrowserWindow({ width: 880, height: 640, frame: true })
 
   // 加载应用----适用于 react 项目
-  mainWindow.loadURL('http://localhost:3000/')
+  mainWindow.loadURL('http://localhost:3000/editor')
   //   mainWindow.loadURL(
   //     url.format({
   //       pathname: path.join(__dirname, 'index.html'),
@@ -51,6 +51,24 @@ function createWindow() {
     mainWindow = null
   })
 }
+
+/* ---- 注册新窗口监听 ---- */
+
+// 新的编辑器窗口
+let editorWindow
+function createEditorWindow() {
+  editorWindow = new BrowserWindow({ width: 640, height: 800, frame: false, parent: mainWindow })
+
+  // 测试:开发下加载
+  editorWindow.loadURL('http://localhost:3000/editor')
+
+  // 真实路径: 目前不存在
+  // editorWindow.loadURL(path.join('file', __dirname, 'editor.html')) // 新窗口渲染进程文件
+  editorWindow.on('closed', () => (editorWindow = null))
+}
+ipcMain.on('newEditorWindow', createEditorWindow)
+
+/* ---- 启动程序 ---- */
 
 // 当 Electron 完成初始化并准备创建浏览器窗口时调用此方法
 app.on('ready', createWindow)
