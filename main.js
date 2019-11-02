@@ -4,29 +4,29 @@ const path = require('path')
 const url = require('url')
 const Store = require('electron-store')
 
-// handle Storage file
-// const schema = {
-//   log:{}
-// }
-const store = new Store({
-  cwd: ''
-})
+/*  文件本地持久化*/
 
-store.set('unicorn', '🦄')
-console.log(store.get('unicorn'))
-//=> '🦄'
+function handleStoreFile(json) {
 
-// Use dot-notation to access nested properties
-store.set('foo.bar', true)
-// console.log(store.get('foo'));
-//=> {bar: true}
+  const appPath = app.getPath()
+  console.log(appPath)
+  // const schema = {
+  //   log:{}
+  // }
+  const store = new Store({
+    cwd: './files/diary'
+  })
+  store.set('unicorn', json.log)
 
-// store.delete('unicorn');
-// console.log(store.get('unicorn'));
-//=> undefined
+  // other usages
 
-// app.getPath()
+  // Use dot-notation to access nested properties
+  // store.set('foo.bar', true)
+  // store.delete('unicorn');
+}
+ipcMain.on('storeLocal', handleStoreFile)
 
+/* 窗口 */
 // 保持window对象的全局引用,避免JavaScript对象被垃圾回收时,窗口被自动关闭.
 let mainWindow
 

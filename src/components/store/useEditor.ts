@@ -1,5 +1,4 @@
 import { useEffect, useMemo, useState } from 'react'
-import contextStore from '../../utils/context-store'
 
 export interface IEditorStore {
   quillConfig: { placeholder: string; modules: { [propName: string]: any[] } }
@@ -50,5 +49,8 @@ const useEditorStore = () => {
   return [editorStore, setters] as const
 }
 
-const useEditor = contextStore.create(useEditorStore)
+// const useEditor = contextStore.create(useEditorStore)
+// export default useEditorStore
 export default useEditorStore
+
+

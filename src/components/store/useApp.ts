@@ -1,9 +1,8 @@
 import { useMemo, useState } from 'react'
-import contextStore from '../../utils/context-store'
 
 export interface ILog {
   content: string
-  date: Date
+  date: Date | string
   id: number | string
 }
 
@@ -12,7 +11,7 @@ const emptyAppStore = {
   logs: emptyLogArray
 }
 
-const useAppStore = () => {
+const useApp = () => {
   const [appStore, setAppStore] = useState(emptyAppStore)
 
   const setters = useMemo(
@@ -39,5 +38,6 @@ const useAppStore = () => {
   return [appStore, setters] as const
 }
 
-const useApp = contextStore.create(useAppStore)
+// const useApp = useContextStore([appStore,setters],'AppContext')
 export default useApp
+// export default useAppStore
