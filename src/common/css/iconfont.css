@@ -1,0 +1,344 @@
+@font-face {
+  font-family: "iconfont";
+  src: url('iconfont.ttf') format('truetype')
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-exit:before {
+  content: "\e904";
+}
+
+.icon-logo:before {
+  content: "\e68b";
+}
+
+.icon-staff:before {
+  content: "\e698";
+}
+
+.icon-person-charge:before {
+  content: "\e699";
+}
+
+.icon-update:before {
+  content: "\e841";
+}
+
+.icon-arrow-right:before {
+  content: "\e924";
+}
+
+.icon-right:before {
+  content: "\e615";
+}
+
+.icon-work-list:before {
+  content: "\e63e";
+}
+
+.icon-statistics:before {
+  content: "\ea60";
+}
+
+.icon-mes:before {
+  content: "\ead7";
+}
+
+.icon-add-circle:before {
+  content: "\eaf5";
+}
+
+.icon-create:before {
+  content: "\eaf8";
+}
+
+.icon-eventseat:before {
+  content: "\eb29";
+}
+
+.icon-down-load:before {
+  content: "\eba1";
+}
+
+.icon-keyboard-arrow-right:before {
+  content: "\ebe6";
+}
+
+.icon-xinxi:before {
+  content: "\ebf9";
+}
+
+.icon-activity:before {
+  content: "\ec5c";
+}
+
+.icon-people:before {
+  content: "\ec69";
+}
+
+.icon-person-add:before {
+  content: "\ec89";
+}
+
+.icon-visible:before {
+  content: "\e833";
+}
+
+.icon-checked:before {
+  content: "\e7e3";
+}
+
+.icon-search-company:before {
+  content: "\e621";
+}
+
+.icon-accountbox:before {
+  content: "\e606";
+}
+
+.icon-admin:before {
+  content: "\e607";
+}
+
+.icon-keyboard-arrow-up:before {
+  content: "\e6c3";
+}
+
+.icon-keyboard-arrow-left:before {
+  content: "\e6d5";
+}
+
+.icon-thumb-up:before {
+  content: "\e78d";
+}
+
+.icon-window-restore:before {
+  content: "\e61c";
+}
+
+.icon-cancle:before {
+  content: "\e626";
+}
+
+.icon-arrowback:before {
+  content: "\e64c";
+}
+
+.icon-enclosure:before {
+  content: "\e616";
+}
+
+.icon-creat-company:before {
+  content: "\e62f";
+}
+
+.icon-search:before {
+  content: "\e656";
+}
+
+.icon-job-description:before {
+  content: "\e62a";
+}
+
+.icon-trash:before {
+  content: "\e617";
+}
+
+.icon-keyboard-arrow-down:before {
+  content: "\e683";
+}
+
+.icon-view-module:before {
+  content: "\e6f2";
+}
+
+.icon-share:before {
+  content: "\e82b";
+}
+
+.icon-page-first:before {
+  content: "\e830";
+}
+
+.icon-adddepar:before {
+  content: "\e9f9";
+}
+
+.icon-task:before {
+  content: "\ea77";
+}
+
+.icon-window-min:before {
+  content: "\e664";
+}
+
+.icon-company:before {
+  content: "\e6cd";
+}
+
+.icon-save:before {
+  content: "\e638";
+}
+
+.icon-txt:before {
+  content: "\e609";
+}
+
+.icon-ppt:before {
+  content: "\e608";
+}
+
+.icon-word:before {
+  content: "\e60c";
+}
+
+.icon-pic:before {
+  content: "\e614";
+}
+
+.icon-pdf:before {
+  content: "\e61b";
+}
+
+.icon-excel:before {
+  content: "\e619";
+}
+
+.icon-zoom-out:before {
+  content: "\e762";
+}
+
+.icon-permissions-user:before {
+  content: "\e618";
+}
+
+.icon-window-max:before {
+  content: "\e66b";
+}
+
+.icon-pic1:before {
+  content: "\e6e8";
+}
+
+.icon-filter:before {
+  content: "\e65b";
+}
+
+.icon-zoom-in:before {
+  content: "\e6b1";
+}
+
+.icon-box-empty:before {
+  content: "\e682";
+}
+
+.icon-heading:before {
+  content: "\e79e";
+}
+
+.icon-md-help-circle-outli:before {
+  content: "\e72c";
+}
+
+.icon-md-repeat:before {
+  content: "\e760";
+}
+
+.icon-settings:before {
+  content: "\e767";
+}
+
+.icon-md-sync:before {
+  content: "\e771";
+}
+
+.icon-apply:before {
+  content: "\e61a";
+}
+
+.icon-calendar:before {
+  content: "\e6a7";
+}
+
+.icon-excel1:before {
+  content: "\e62d";
+}
+
+.icon-add:before {
+  content: "\e600";
+}
+
+.icon-close:before {
+  content: "\e601";
+}
+
+.icon-work-log:before {
+  content: "\e888";
+}
+
+.icon-subject:before {
+  content: "\e8c5";
+}
+
+.icon-model:before {
+  content: "\e8d4";
+}
+
+.icon-add-classify:before {
+  content: "\e902";
+}
+
+.icon-monetization-on:before {
+  content: "\eb5f";
+}
+
+.icon-eye:before {
+  content: "\e757";
+}
+
+.icon-pdf1:before {
+  content: "\e602";
+}
+
+.icon-more:before {
+  content: "\e65c";
+}
+
+.icon-department:before {
+  content: "\e669";
+}
+
+.icon-team:before {
+  content: "\e611";
+}
+
+.icon-txt1:before {
+  content: "\e79f";
+}
+
+.icon-unknown-type:before {
+  content: "\e60f";
+}
+
+.icon-ppt1:before {
+  content: "\e696";
+}
+
+.icon-word1:before {
+  content: "\e6bc";
+}
+
+.icon-rotate:before {
+  content: "\e953";
+}
+
+.icon-checkbox:before {
+  content: "\e60a";
+}

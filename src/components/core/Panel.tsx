@@ -1,3 +1,4 @@
+import moment from 'moment'
 import React from 'react'
 
 interface IProps {
@@ -5,12 +6,12 @@ interface IProps {
   date: Date | string
 }
 const Panel = (props: IProps) => {
+  const {date,content}=props
   return (
     <div>
-      <div>{props.content}</div>
+      <div>{content}</div>
       <div>
-        <span> fake subtitle</span>
-        <span> {props.date.toString()}</span>
+        <span>{moment(date).format("YYYY-MM-DD HH:mm:ss")}</span>
       </div>
     </div>
   )

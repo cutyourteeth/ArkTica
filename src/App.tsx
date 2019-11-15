@@ -1,6 +1,8 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import Collector from './components/Collector/Collector'
 import Editor from './components/Editor/Editor'
+import { Factory } from './components/Factory/Factory'
 import Home from './components/Home/Home'
 import Reader from './components/Reader/Reader'
 import useApp from './components/store/useApp'
@@ -22,11 +24,17 @@ const App: React.FC = () => {
           <Route path="/reader" exact={true}>
             <Reader />
           </Route>
+          <Route path="/collector">
+            <Collector />
+          </Route>
+          <Route path="/factory">
+            <Factory />
+          </Route>
         </Switch>
       </Router>
     </div>
   )
-  return useContextStore(Raw,appStore,'AppContext')
+  return useContextStore(Raw, appStore, 'AppContext')
 }
 
 export default App

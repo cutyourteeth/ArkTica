@@ -6,7 +6,7 @@ export interface ILog {
   id: number | string
 }
 
-const emptyLogArray: ILog[] = [{ content: '', id: 0, date: new Date() }]
+const emptyLogArray: ILog[] = []
 const emptyAppStore = {
   logs: emptyLogArray
 }
@@ -30,7 +30,7 @@ const useApp = () => {
           updatedState.logs.push(log)
           return updatedState
         })
-      }
+      },
     }),
     []
   )

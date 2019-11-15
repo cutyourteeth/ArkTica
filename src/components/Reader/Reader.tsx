@@ -1,21 +1,19 @@
-import { Button } from 'antd'
 import React from 'react'
-import { useHistory } from 'react-router'
+import HomeButton from '../../components/core/HomeButton'
 import Panel from '../core/Panel'
+import useApp from '../store/useApp'
 
 const Reader = () => {
-  const logs = [] as any[]
-  
-  const history = useHistory()
-  const back = ()=>{
-    history.push('/')
-  }
+  const [appStore] = useApp()
+  const { logs } = appStore
   return (
     <div>
-      <Button onClick={back}>back</Button>
-      {logs.map(item => {
-        return <Panel key={item.id} content={item.content} date={item.date} />
-      })}
+      <HomeButton />
+      <div>
+        {logs.map(item => {
+          return <Panel key={item.id} content={item.content} date={item.date} />
+        })}
+      </div>
     </div>
   )
 }
