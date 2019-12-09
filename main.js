@@ -4,47 +4,30 @@ const path = require('path')
 const url = require('url')
 const Store = require('electron-store')
 
-/*  文件本地持久化*/
-
-function handleStoreFile(json) {
-
-  const appPath = app.getPath()
-  console.log(appPath)
-  // const schema = {
-  //   log:{}
-  // }
-  const store = new Store({
-    cwd: './files/diary'
-  })
-  store.set('unicorn', json.log)
-
-  // other usages
-
-  // Use dot-notation to access nested properties
-  // store.set('foo.bar', true)
-  // store.delete('unicorn');
-}
-ipcMain.on('storeLocal', handleStoreFile)
-
-/* 窗口 */
-// 保持window对象的全局引用,避免JavaScript对象被垃圾回收时,窗口被自动关闭.
+/* 主窗口 */
 let mainWindow
+let mainWindowConfig = {
+  width: 880,
+  height: 640,
+  frame: true,
+  webPreferences: { nodeIntegration: true }
+}
+let productionRouteConfig = {
+  pathname: path.join(__dirname, 'index.html'),
+  protocol: 'file:',
+  slashes: true
+}
 
 function createWindow() {
-  mainWindow = new BrowserWindow({ width: 880, height: 640, frame: true })
+  mainWindow = new BrowserWindow(mainWindowConfig)
+  mainWindow.setMenu(null)
 
-  // 加载应用----适用于 react 项目
-  mainWindow.loadURL('http://localhost:3000/editor')
-  //   mainWindow.loadURL(
-  //     url.format({
-  //       pathname: path.join(__dirname, 'index.html'),
-  //       protocol: 'file:',
-  //       slashes: true
-  //     })
-  //   )
-
-  // 打开开发者工具，默认不打开
-  mainWindow.webContents.openDevTools()
+  if (process.NODE_ENV === 'production') {
+    mainWindow.loadURL(url.format(productionRouteConfig))
+  } else {
+    mainWindow.loadURL('http://localhost:3000/editor')
+    mainWindow.webContents.openDevTools() // 打开开发者工具
+  }
 
   // 关闭window时触发下列事件.
   mainWindow.on('closed', function() {
@@ -87,3 +70,24 @@ app.on('activate', function() {
     createWindow()
   }
 })
+
+/*  文件本地持久化*/
+
+function handleStoreFile(json) {
+  const appPath = app.getPath()
+  console.log(appPath)
+  // const schema = {
+  //   log:{}
+  // }
+  const store = new Store({
+    cwd: './files/diary'
+  })
+  store.set('unicorn', json.log)
+
+  // other usages
+
+  // Use dot-notation to access nested properties
+  // store.set('foo.bar', true)
+  // store.delete('unicorn');
+}
+ipcMain.on('storeLocal', handleStoreFile)

@@ -6,9 +6,13 @@ import { uuid } from '../../utils/global-utils'
 import HomeButton from '../core/HomeButton'
 import useApp from '../store/useApp'
 import useEditor, { IEditorStore } from '../store/useEditor'
-// const ipcRender = require('electron').ipc
 import EditorWrapper from './style'
 
+const low = window.require('lowdb')
+// const path = window.require('path')
+const FileSync = window.require('lowdb/adapters/FileSync')
+const db = low(new FileSync('db.json'))
+console.log(db)
 
 const Editor = () => {
   const [editorStore, setters] = useEditor()
@@ -23,9 +27,25 @@ const Editor = () => {
     resetQuillValue()
   }
 
-  const nodeTest = () => {
-    const fs = require('fs')
-    console.log(fs);
+  const saveLocal = () => {
+    db.set('log', quillValue).write();
+
+    db.defaults({ posts: [], user: {}, count: 0 }).write()
+
+    // Add a post
+    db.get('posts')
+      .push({ id: 1, title: 'lowdb is awesome' })
+      .write()
+
+    // Set a user using Lodash shorthand syntax
+    db.set('user.name', 'typicode').write()
+
+    // Increment count
+    db.update('count', (n:number) => n + 1).write()
+  }
+
+  const loadLocal = () => {
+    // db.get('log', quillValue)
   }
 
   const storeLogToLocal = () => {
@@ -40,13 +60,12 @@ const Editor = () => {
       <HomeButton />
       <ReactQuill {...quillConfig} value={quillValue} onChange={changeQuillValue} />
       <div>
-        <Button onClick={handleUpload}>123</Button>
-        <Button onClick={nodeTest}>123</Button>
+        <Button onClick={handleUpload}>handleUpload</Button>
+        <Button onClick={saveLocal}>saveLocal</Button>
+        <Button onClick={loadLocal}>loadLocal</Button>
       </div>
     </EditorWrapper>
   )
 }
 
 export default Editor
-
-
