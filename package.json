@@ -29,6 +29,7 @@
     "typescript": "^3.6.4"
   },
   "scripts": {
+    "go": "react-scripts start",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
