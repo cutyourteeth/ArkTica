@@ -1,7 +1,6 @@
 import { Button } from 'antd'
 import React from 'react'
 import { useHistory } from 'react-router-dom'
-import styled from 'styled-components'
 
 const HomeButton = () => {
   const history = useHistory()
@@ -13,4 +12,3 @@ const HomeButton = () => {
 
 export default HomeButton
 
-const customHomeButton = styled(Button)``

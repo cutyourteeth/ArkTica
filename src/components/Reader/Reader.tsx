@@ -1,5 +1,5 @@
 import React from 'react'
-import HomeButton from '../../components/core/HomeButton'
+import HomeButton from '../core/HomeButton'
 import Panel from '../core/Panel'
 import useApp from '../store/useApp'
 
