@@ -1,6 +1,8 @@
 import { useEffect, useMemo, useState } from 'react'
 
 export interface IEditorStore {
+  title: string
+  date: string
   quillConfig: { placeholder: string; modules: { [propName: string]: any[] } }
   quillValue: string
 }
@@ -13,6 +15,8 @@ const quillConfig = {
 }
 
 const emptyStore = {
+  title: '',
+  date: '',
   quillConfig,
   quillValue: ''
 }
@@ -22,6 +26,22 @@ const useEditorStore = () => {
 
   const setters = useMemo(
     () => ({
+      changeTitle(title: string) {
+        setEditorStore(s => {
+          const updatedState = { ...s }
+          updatedState.title = title
+          return updatedState
+        })
+      },
+
+      changeDate(dateString: string) {
+        setEditorStore(s => {
+          const updatedState = { ...s }
+          updatedState.date = dateString
+          return updatedState
+        })
+      },
+
       changeQuillValue(value: string) {
         setEditorStore(s => {
           const updatedState = { ...s }
@@ -30,13 +50,16 @@ const useEditorStore = () => {
         })
       },
 
+      // 重置Quill内容
       resetQuillValue() {
         setEditorStore(s => {
           const updatedState = { ...s }
           updatedState.quillValue = ''
           return updatedState
         })
-      }
+      },
+
+      
     }),
     []
   )
@@ -46,11 +69,11 @@ const useEditorStore = () => {
       setters.changeQuillValue('')
     }
   }, [setters])
+
+
   return [editorStore, setters] as const
 }
 
 // const useEditor = contextStore.create(useEditorStore)
 // export default useEditorStore
 export default useEditorStore
-
-
