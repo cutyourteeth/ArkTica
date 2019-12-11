@@ -1,5 +1,6 @@
 // 引入electron并创建一个BrowserWindow
-const { app, BrowserWindow, ipcMain } = require('electron')
+const electron = require('electron')
+const { app, BrowserWindow, ipcMain } = electron
 const path = require('path')
 const url = require('url')
 const Store = require('electron-store')
@@ -7,8 +8,10 @@ const Store = require('electron-store')
 /* 主窗口 */
 let mainWindow
 let mainWindowConfig = {
-  width: 880,
-  height: 640,
+  width: 950,
+  height: 700,
+  minWidth: 950,
+  minHeight: 700,
   frame: true,
   webPreferences: { nodeIntegration: true }
 }
@@ -20,6 +23,7 @@ let productionRouteConfig = {
 
 function createWindow() {
   mainWindow = new BrowserWindow(mainWindowConfig)
+  globals.mainWindow = mainWindow.id // 注册id
   mainWindow.setMenu(null)
 
   if (process.NODE_ENV === 'production') {
@@ -34,6 +38,8 @@ function createWindow() {
     mainWindow = null
   })
 }
+
+// startEnviron = electron.getGlobal('startEnviron')
 
 /* ---- 注册新窗口监听 ---- */
 
@@ -91,3 +97,8 @@ function handleStoreFile(json) {
   // store.delete('unicorn');
 }
 ipcMain.on('storeLocal', handleStoreFile)
+
+// electron记录表
+let globals = {
+  mainWindow
+}
