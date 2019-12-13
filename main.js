@@ -37,6 +37,8 @@ function createWindow() {
   mainWindow.on('closed', function() {
     mainWindow = null
   })
+
+  
 }
 
 // startEnviron = electron.getGlobal('startEnviron')
