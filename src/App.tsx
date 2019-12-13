@@ -2,10 +2,10 @@ import React from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Collector from './components/Collector/Collector'
 import Editor from './components/Editor/Editor'
-import { Factory } from './components/Factory/Factory'
 import Home from './components/Home/Home'
 import Reader from './components/Reader/Reader'
 import useApp from './components/store/useApp'
+import { Workbench } from './components/Workbench/Workbench'
 import useContextStore from './utils/context-store'
 
 const App: React.FC = () => {
@@ -28,7 +28,7 @@ const App: React.FC = () => {
             <Collector />
           </Route>
           <Route path="/factory">
-            <Factory />
+            <Workbench />
           </Route>
         </Switch>
       </Router>

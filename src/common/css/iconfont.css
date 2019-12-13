@@ -11,6 +11,7 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+
 .icon-exit:before {
   content: "\e904";
 }
@@ -47,7 +48,7 @@
   content: "\ea60";
 }
 
-.icon-mes:before {
+.icon-message:before {
   content: "\ead7";
 }
 
@@ -59,23 +60,11 @@
   content: "\eaf8";
 }
 
-.icon-eventseat:before {
-  content: "\eb29";
-}
-
-.icon-down-load:before {
+.icon-download:before {
   content: "\eba1";
 }
 
-.icon-keyboard-arrow-right:before {
-  content: "\ebe6";
-}
-
-.icon-xinxi:before {
-  content: "\ebf9";
-}
-
-.icon-activity:before {
+.icon-alert:before {
   content: "\ec5c";
 }
 
@@ -131,7 +120,7 @@
   content: "\e64c";
 }
 
-.icon-enclosure:before {
+.icon-paper-clip:before {
   content: "\e616";
 }
 
@@ -139,16 +128,24 @@
   content: "\e62f";
 }
 
+.icon-rightarrow:before {
+  content: "\e94c";
+}
+
 .icon-search:before {
   content: "\e656";
 }
 
-.icon-job-description:before {
+.icon-staff-card:before {
   content: "\e62a";
 }
 
 .icon-trash:before {
   content: "\e617";
+}
+
+.icon-query-sign:before {
+  content: "\e60b";
 }
 
 .icon-keyboard-arrow-down:before {
@@ -167,10 +164,6 @@
   content: "\e830";
 }
 
-.icon-adddepar:before {
-  content: "\e9f9";
-}
-
 .icon-task:before {
   content: "\ea77";
 }
@@ -187,8 +180,12 @@
   content: "\e638";
 }
 
-.icon-txt:before {
-  content: "\e609";
+.icon-blchecked:before {
+  content: "\e668";
+}
+
+.icon-plus:before {
+  content: "\e60a";
 }
 
 .icon-ppt:before {
@@ -196,11 +193,7 @@
 }
 
 .icon-word:before {
-  content: "\e60c";
-}
-
-.icon-pic:before {
-  content: "\e614";
+  content: "\e60d";
 }
 
 .icon-pdf:before {
@@ -211,8 +204,8 @@
   content: "\e619";
 }
 
-.icon-zoom-out:before {
-  content: "\e762";
+.icon-zoom-in:before {
+  content: "\e6b1";
 }
 
 .icon-permissions-user:before {
@@ -223,7 +216,7 @@
   content: "\e66b";
 }
 
-.icon-pic1:before {
+.icon-pic:before {
   content: "\e6e8";
 }
 
@@ -231,8 +224,16 @@
   content: "\e65b";
 }
 
-.icon-zoom-in:before {
-  content: "\e6b1";
+.icon-pencil:before {
+  content: "\e600";
+}
+
+.icon-arrow-down:before {
+  content: "\e645";
+}
+
+.icon-zoom-out:before {
+  content: "\e762";
 }
 
 .icon-box-empty:before {
@@ -243,20 +244,16 @@
   content: "\e79e";
 }
 
-.icon-md-help-circle-outli:before {
-  content: "\e72c";
-}
-
-.icon-md-repeat:before {
-  content: "\e760";
-}
-
 .icon-settings:before {
   content: "\e767";
 }
 
-.icon-md-sync:before {
+.icon-sync:before {
   content: "\e771";
+}
+
+.icon-wrong:before {
+  content: "\e6ce";
 }
 
 .icon-apply:before {
@@ -267,20 +264,16 @@
   content: "\e6a7";
 }
 
-.icon-excel1:before {
-  content: "\e62d";
+.icon-minus:before {
+  content: "\e996";
 }
 
 .icon-add:before {
-  content: "\e600";
-}
-
-.icon-close:before {
   content: "\e601";
 }
 
-.icon-work-log:before {
-  content: "\e888";
+.icon-close:before {
+  content: "\e602";
 }
 
 .icon-subject:before {
@@ -303,10 +296,6 @@
   content: "\e757";
 }
 
-.icon-pdf1:before {
-  content: "\e602";
-}
-
 .icon-more:before {
   content: "\e65c";
 }
@@ -319,26 +308,11 @@
   content: "\e611";
 }
 
-.icon-txt1:before {
-  content: "\e79f";
-}
-
 .icon-unknown-type:before {
   content: "\e60f";
-}
-
-.icon-ppt1:before {
-  content: "\e696";
-}
-
-.icon-word1:before {
-  content: "\e6bc";
 }
 
 .icon-rotate:before {
   content: "\e953";
 }
 
-.icon-checkbox:before {
-  content: "\e60a";
-}

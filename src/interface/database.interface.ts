@@ -11,10 +11,15 @@ export interface Note {
 }
 
 export interface Setting {
-  direct: boolean // 直接进入
+  direct: boolean // 
+}
+
+interface DefaultRoot {
+  id: { diaries: number; notes: number } // id-auto-increment
 }
 
 export interface BasicDatabase {
+  __root__: DefaultRoot
   diaries: Diary[]
   notes: Note[]
   setting: Setting
@@ -26,6 +31,7 @@ export interface BasicFind {
   type: Type
   key: { [key: string]: any }
 }
+
 export interface BasicUnit {
   type: Type
   data: { [key: string]: any }

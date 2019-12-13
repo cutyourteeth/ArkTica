@@ -5,14 +5,7 @@ export const HomeWrapper = styled.div`
   justify-content: center;
   align-items: center;
 
-  /* .clearfix:after {
-    content: '.';
-    display: block;
-    clear: both;
-    visibility: hidden;
-    line-height: 0 !important;
-    height: 0;
-  } */
+  
   .container {
     position: relative;
     margin: 2% auto 0 auto;

@@ -1,13 +1,9 @@
-import { BasicDatabase, BasicUnit, Type } from '../interface/database.interface'
-
-const low = window.require('lowdb')
-// const path = window.require('path')
-const FileSync = window.require('lowdb/adapters/FileSync')
-const db = low(new FileSync('db.json'))
-
-/* Basic methods
+/* 
+ * lowdb-manager
+ * description: a lowdb method wrapper for building local database
+ * 
+ * 
  * Schema
- * db.defaults({ notes: [] })
  * db.defaults({ posts: [], user: {}, count: 0 }).write()
  *
  * Set
@@ -30,23 +26,51 @@ const db = low(new FileSync('db.json'))
  *  .assign({ title: 'hi!'})
  *  .write()
  */
+import moment from 'moment'
+import { BasicDatabase, BasicUnit, Type } from '../interface/database.interface'
 
-const schema: BasicDatabase = {
+// const path = window.require('path')
+const low = window.require('lowdb')
+const FileSync = window.require('lowdb/adapters/FileSync')
+const db = low(new FileSync('db.json'))
+
+const initSchema: BasicDatabase = {
+  __root__: { id: { diaries: 0, notes: 0 } },
   notes: [],
   diaries: [],
   setting: { direct: false }
 }
 
-const initial = () => db.defaults(schema)
+/* basic function */ 
+const find = (type: Type, key: { [key: string]: any }) => {
+  const result = db
+    .get(type)
+    .find(key)
+  console.log(result);
+  
+  return result
+}
+
+const idAutoIncrement = (type: Type) => {
+  const route = `__root__.id.${type}`
+  db.update(route, (n: number) => n + 1).write()
+}
+
+/* executors */ 
+const initial = () => db.defaults(initSchema).write()
 
 const insert = (payload: BasicUnit) => {
   const { type, data } = payload
-  db.get[type].push(data).write()
-}
+  let id = db.get('__root__.id').value()[type]
 
-const find = (type: Type, key: { [key: string]: any }) => {
-  const result = db.get(type).find(key)
-  return result
+  const current = moment().format('YYYY-MM-DD HH:mm:ss')
+  const finalData = { id, createDate: current, updateDate: current, ...data }
+
+  db.get(type)
+    .push(finalData)
+    .write()
+
+  idAutoIncrement(type)
 }
 
 const update = (payload: BasicUnit) => {
@@ -56,13 +80,12 @@ const update = (payload: BasicUnit) => {
 
 const remove = (payload: BasicUnit) => {
   const { type, data } = payload
+  find(type, data).assign(data)
+
   db.get(type)
     .remove(data)
     .write()
 }
-
-// 对比本地和云端某对数据解包对比
-const compare = () => {}
 
 const databaseExecutors = {
   initial,

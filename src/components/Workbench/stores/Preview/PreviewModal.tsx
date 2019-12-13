@@ -1,6 +1,18 @@
-import { Modal } from 'antd'
 import React, { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
+import { PreviewWrapper } from './style'
+/* 本组件细节说明
+ * 业务上
+ * 基本功能：通过接受图片的url来展示图片
+ * 操作：缩放、旋转、移动、归位、下载（暂缓）
+ * 细节描述：
+ * 基础：整个组件分为3层，外框（modal）、容器（container）、图片（image）
+ *      外框随window尺寸自适应，同时影响到内部容器。容器初始大小仅受图片原始尺寸和最大视口影响。
+ * 定位：图片加载完成后原始定位的确定，外框不能高度超过一屏、不能出现滚动条，容器和外框保持左右上10px，下50px间距。容器一旦定位即固定
+ * 缩放：跟随鼠标缩放，缩放位置保持在光标中心，留意在图片旋转后依然要计算到中心
+ * 旋转：根据中心旋转，同时影响容器尺寸变换
+ * 归位：如字面意思。
+ */
 
 interface IProps {
   url: string
@@ -17,12 +29,14 @@ const initImageState = {
   t: 0, // top
   centerX: 0,
   centerY: 0,
-  wStatic: 0,
-  hStatic: 0,
   rotateTime: 0, // 旋转的次数
   everRotated: false // 之前是否经历过旋转
 }
 
+const naturalSize = {
+  w: 0,
+  h: 0
+}
 const initContainerState = {
   w: 0, // width
   h: 0, // height
@@ -35,13 +49,14 @@ function PreviewModal(this: any, props: IProps) {
 
   const [imageState, setImageState] = useState(initImageState)
   const [containerState, setContainerState] = useState(initContainerState)
+  const [naturalState, setNaturalState] = useState(naturalSize)
 
   // 临时路径函数： 服务本地public内的图片
   const [imageUrl, setImageUrl] = useState('')
   useEffect(() => {
     const newUrl = `${process.env.PUBLIC_URL}/static/image/${url}`
     console.log(newUrl)
-
+    // here
     setImageUrl(newUrl)
   }, [url])
 
@@ -49,12 +64,15 @@ function PreviewModal(this: any, props: IProps) {
   let container: { current: any } = useRef(null)
   let image: { current: any } = useRef(null)
 
-  /* 初始化容器大小 */
+  /*
+   * 初始原始数据
+   * 根据窗口比例调整内部Modal的限高/宽
+   * 图片/窗口的w和h分别算出比例
+   */
   useEffect(() => {
-    /** 根据窗口比例调整内部Modal的限高/宽 */
-    const sizing = (node: HTMLImageElement) => {
-      const wMax = window.innerWidth * 0.9
-      const hMax = window.innerHeight * 0.9 - 100 // 100为底部功能栏高度保留
+    const initialSizing = (node: HTMLImageElement) => {
+      const wMax = window.innerWidth
+      const hMax = window.innerHeight - 100 // 100为底部功能栏高度保留
 
       const wOrigin = node.naturalWidth // 初始的图片宽
       const hOrigin = node.naturalHeight // 初始的图片高度
@@ -65,23 +83,22 @@ function PreviewModal(this: any, props: IProps) {
       const size =
         wRatio < 1 && hRatio < 1 ? { w: wOrigin, h: hOrigin } : wRatio > hRatio ? { w: wMax, h: hOrigin / wRatio } : { w: wOrigin / hRatio, h: hMax }
 
-      setImageState(state => {
-        const updatedState = { w: size.w, h: size.h, wStatic: size.w, hStatic: size.h }
-        console.log('图片元素更新状态', updatedState)
-        return { ...state, ...updatedState }
-      })
-
-      setContainerState(state => {
-        return { ...state, wMax, hMax, w: size.w, h: size.h }
-      })
+      setNaturalState(size)
     }
     // 目前modal内无法直接通过ref.current 获得dom元素
-    setTimeout(() => {
-      if (image.current) {
-        sizing(image.current)
-      }
-    }, 0)
-  }, [showPreviewModal])
+    if (image.current) {
+      setTimeout(() => {
+        initialSizing(image.current)
+        console.log('init');
+        
+      }, 0)
+    }
+  }, [imageUrl, showPreviewModal])
+
+  /*
+   * 管理容器尺寸
+   */
+  useEffect(() => setContainerState(s => ({ ...s, ...naturalState })), [naturalState])
 
   // 放大
   const zoomIn = () => setImageState(state => ({ ...state, s: imageState.s + 0.05 }))
@@ -103,8 +120,8 @@ function PreviewModal(this: any, props: IProps) {
     setContainerState(s => {
       const updatedState = { ...s }
       // 宽图扩展高,长图扩展宽
-      const ratio = imageState.wStatic / imageState.hStatic
-      ratio > 1 ? (updatedState.h = s.w) : (updatedState.w = s.h)
+      // const ratio = imageState.wStatic / imageState.hStatic
+      // ratio > 1 ? (updatedState.h = s.w) : (updatedState.w = s.h)
       return updatedState
     })
   }
@@ -197,6 +214,9 @@ function PreviewModal(this: any, props: IProps) {
     container.current.onselectstart = null
   }
 
+  // 复位图片
+  const reset = () => {}
+
   // 关闭modal 复位图片
   const closeModal = () => {
     closePreviewModal()
@@ -225,7 +245,7 @@ function PreviewModal(this: any, props: IProps) {
   `
 
   return (
-    <ModalPreviewWrapper onCancel={closeModal} footer={null} visible={showPreviewModal}>
+    <PreviewWrapper onCancel={closeModal} footer={null} visible={showPreviewModal}>
       <div>图片预览</div>
       <Preview>
         <div id="preview-container" ref={container} onMouseMove={startMove} onMouseUp={endMove}>
@@ -236,55 +256,11 @@ function PreviewModal(this: any, props: IProps) {
         <i className="iconfont operator icon-zoom-in" onClick={zoomIn} />
         <i className="iconfont operator icon-zoom-out" onClick={zoomOut} />
         <i className="iconfont operator icon-rotate" onClick={rotateClockwise} />
-        <i className="iconfont operator icon-down-load" />
+        <i className="iconfont operator icon-sync" onClick={reset} />
+        <i className="iconfont operator icon-download" />
       </div>
-    </ModalPreviewWrapper>
+    </PreviewWrapper>
   )
 }
 
 export default PreviewModal
-
-const ModalPreviewWrapper = styled(Modal)`
-  display: flex;
-  justify-content: center;
-  top: 40px !important;
-
-  /* hack */
-  && {
-    .ant-modal-content {
-      background: #f5f5f5;
-    }
-    .ant-modal-body {
-      padding: 12px;
-    }
-    .ant-modal-close-x {
-      line-height: 30px;
-      width: 37px;
-    }
-  }
-
-  .operation-bar {
-    width: 100%;
-    height: 50px;
-    display: flex;
-    line-height: 50px;
-    align-items: center;
-    flex-flow: row nowrap;
-    justify-content: center;
-    .operator {
-      color: #9d9d96;
-      font-size: 26px;
-      cursor: pointer;
-      margin-left: 30px;
-      background: none;
-      border: none;
-      outline: none;
-      :hover {
-        color: rgba(0, 120, 215, 0.8);
-      }
-      &:first-child {
-        margin: 0;
-      }
-    }
-  }
-`

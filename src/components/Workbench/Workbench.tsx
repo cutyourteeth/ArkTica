@@ -1,6 +1,6 @@
 import { Button } from 'antd'
 import React, { useState } from 'react'
-import PreviewModal from './components/Preview/PreviewModal'
+import PreviewModal from './stores/Preview/PreviewModal'
 
 
 
@@ -13,7 +13,10 @@ const testData = {
   thickImage
 }
 
-export function Factory(this: any) {
+console.log(123123);
+
+
+export function Workbench(this: any) {
   const [onShowPreview, setOnShowPreview] = useState(false)
   const [currentResource, setCurrentResource] = useState<string>('')
   const openPreviewModal = (url: string) => {
