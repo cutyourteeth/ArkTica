@@ -1,8 +1,8 @@
-/* 
+/*
  * lowdb-manager
  * description: a lowdb method wrapper for building local database
- * 
- * 
+ *
+ *
  * Schema
  * db.defaults({ posts: [], user: {}, count: 0 }).write()
  *
@@ -27,7 +27,7 @@
  *  .write()
  */
 import moment from 'moment'
-import { BasicDatabase, BasicUnit, Type } from '../interface/database.interface'
+import { BasicDatabase, BasicRequire, BasicUnit, Type } from '../interface/database.interface'
 
 // const path = window.require('path')
 const low = window.require('lowdb')
@@ -41,13 +41,10 @@ const initSchema: BasicDatabase = {
   setting: { direct: false }
 }
 
-/* basic function */ 
+/* basic function */
 const find = (type: Type, key: { [key: string]: any }) => {
-  const result = db
-    .get(type)
-    .find(key)
-  console.log(result);
-  
+  const result = db.get(type).find(key)
+  console.log('found',result)
   return result
 }
 
@@ -56,7 +53,8 @@ const idAutoIncrement = (type: Type) => {
   db.update(route, (n: number) => n + 1).write()
 }
 
-/* executors */ 
+/* executors */
+
 const initial = () => db.defaults(initSchema).write()
 
 const insert = (payload: BasicUnit) => {
@@ -87,9 +85,17 @@ const remove = (payload: BasicUnit) => {
     .write()
 }
 
+const load = (type:Type) => {
+  return db.get(type).value()
+}
+
+const filter = (require: BasicRequire) => {}
+
 const databaseExecutors = {
   initial,
+  load,
   insert,
+  filter,
   update,
   remove
 }
