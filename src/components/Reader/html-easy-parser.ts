@@ -6,5 +6,6 @@ export default function easyParser(domString: string, target: ValidTargets = 'va
   }
   const parser = new DOMParser()
   const dom = parser.parseFromString(domString, 'text/html')
+  return dom
   // pause here
 }

@@ -9,7 +9,7 @@ export const DiaryUnit = (props: { diary: FullDiary }) => {
         {title}
         {date}
       </div>
-      <div>{content}</div> {/* easyParser(content) */}
+      <div dangerouslySetInnerHTML={{__html:content}}></div>
       <div>
         诞生于:「{createDate}」 最后更新于:「{updateDate}」
       </div>
