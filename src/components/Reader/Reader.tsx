@@ -7,20 +7,22 @@ import HomeButton from '../core/HomeButton'
 import DiaryUnit from './DiaryUnit'
 
 const Reader = () => {
-  const [diaries,setDiaries]=useState<FullDiary[]>([])
-  useEffect(() =>{
-    setDiaries( databaseExecutors.load('diaries'))
-  },[])
+  const [diaries, setDiaries] = useState<FullDiary[]>([])
+  useEffect(() => {
+    setDiaries(databaseExecutors.load('diaries'))
+  }, [])
 
   return (
     <ReaderWrapper>
-      <HomeButton />
-      你可在此载入本地的日志
-
-      <Button>Load local diaries</Button>
-      
-      <div>
-        {diaries.map(diary=>(<DiaryUnit key={diary.id} diary={diary} />))}
+      <div className="reader-header">
+        <HomeButton />
+        你可在此载入本地的日志
+        <Button>Load local diaries</Button>
+        <div>
+          {diaries.map(diary => (
+            <DiaryUnit key={diary.id} diary={diary} />
+          ))}
+        </div>
       </div>
     </ReaderWrapper>
   )
@@ -29,5 +31,5 @@ const Reader = () => {
 export default Reader
 
 const ReaderWrapper = styled.div`
-background-color: #fff;
+  background-color: #fff;
 `
