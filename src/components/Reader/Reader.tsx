@@ -18,11 +18,12 @@ const Reader = () => {
         <HomeButton />
         你可在此载入本地的日志
         <Button>Load local diaries</Button>
-        <div>
-          {diaries.map(diary => (
-            <DiaryUnit key={diary.id} diary={diary} />
-          ))}
-        </div>
+      </div>
+
+      <div>
+        {diaries.map(diary => (
+          <DiaryUnit key={diary.id} diary={diary} />
+        ))}
       </div>
     </ReaderWrapper>
   )
@@ -31,5 +32,14 @@ const Reader = () => {
 export default Reader
 
 const ReaderWrapper = styled.div`
-  background-color: #fff;
+  /* background: linear-gradient(15deg, #d33f34 50%, #a61322 50.1%); */
+  background: white;
+  .reader-header {
+
+    height: 500px;
+    padding: 50px auto;
+    background: url(https://raw.githubusercontent.com/hudsonmarinho/header-and-footer-parallax-effect/master/assets/images/bg-header.jpg) 50% 50%
+      no-repeat;
+    background-size: 100% auto;
+  }
 `
