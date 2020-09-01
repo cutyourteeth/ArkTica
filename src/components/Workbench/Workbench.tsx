@@ -5,18 +5,14 @@ const thickImage = 'thick-image.jpg'
 
 const testData = {
   longImage,
-  thickImage
+  thickImage,
 }
 
-console.log(123123)
-
 export function Workbench(this: any) {
-
   return (
     <div>
       here is the factory
-      <div className="workbench">
-      </div>
+      <div className="workbench"></div>
     </div>
   )
 }

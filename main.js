@@ -5,6 +5,12 @@ const path = require('path')
 const url = require('url')
 const Store = require('electron-store')
 
+
+const fs = require('fs')
+const axios = require('axios')
+
+axios.defaults.adapter = require('axios/lib/adapters/http')
+
 /* 主窗口 */
 let mainWindow
 let mainWindowConfig = {
@@ -13,12 +19,12 @@ let mainWindowConfig = {
   minWidth: 950,
   minHeight: 700,
   frame: true,
-  webPreferences: { nodeIntegration: true }
+  webPreferences: { nodeIntegration: true },
 }
 let productionRouteConfig = {
   pathname: path.join(__dirname, 'index.html'),
   protocol: 'file:',
-  slashes: true
+  slashes: true,
 }
 
 function createWindow() {
@@ -33,12 +39,22 @@ function createWindow() {
     mainWindow.webContents.openDevTools() // 打开开发者工具
   }
 
-  // 关闭window时触发下列事件.
-  mainWindow.on('closed', function() {
-    mainWindow = null
+  ipcMain.on('download', (event, arg) => {
+    const url = 'http://47.100.250.103:9007/api/defect/packet/93/'
+    axios({
+      method: 'get',
+      url,
+      responseType: 'stream',
+      headers: { Authorization: `Token 0799b0c6fce7c696c16ccc368868f44b113f73bf` },
+    }).then(function (response) {
+      response.data.pipe(fs.createWriteStream('1.zip'))
+    })
   })
 
-  
+  // 关闭window时触发下列事件.
+  mainWindow.on('closed', function () {
+    mainWindow = null
+  })
 }
 
 // startEnviron = electron.getGlobal('startEnviron')
@@ -65,14 +81,14 @@ ipcMain.on('newEditorWindow', createEditorWindow)
 app.on('ready', createWindow)
 
 // 所有窗口关闭时退出应用.
-app.on('window-all-closed', function() {
+app.on('window-all-closed', function () {
   // macOS中除非用户按下 `Cmd + Q` 显式退出,否则应用与菜单栏始终处于活动状态.
   if (process.platform !== 'darwin') {
     app.quit()
   }
 })
 
-app.on('activate', function() {
+app.on('activate', function () {
   // macOS中点击Dock图标时没有已打开的其余应用窗口时,则通常在应用中重建一个窗口
   if (mainWindow === null) {
     createWindow()
@@ -88,7 +104,7 @@ function handleStoreFile(json) {
   //   log:{}
   // }
   const store = new Store({
-    cwd: './files/diary'
+    cwd: './files/diary',
   })
   store.set('unicorn', json.log)
 
@@ -102,5 +118,5 @@ ipcMain.on('storeLocal', handleStoreFile)
 
 // electron记录表
 let globals = {
-  mainWindow
+  mainWindow,
 }

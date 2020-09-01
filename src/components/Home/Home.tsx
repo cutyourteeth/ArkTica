@@ -4,11 +4,9 @@ import { HomeWrapper } from './style'
 
 const Home = () => {
   const history = useHistory()
-  const toReader = () => {
-    history.push('/reader')
-  }
-  const toEditor = () => {
-    history.push('/editor')
+
+  const to = (target: string) => {
+    history.push(target)
   }
 
   return (
@@ -105,7 +103,7 @@ const Home = () => {
           <div className="pa pen-bottom"></div>
         </div>
 
-        <div className="pa handwatch hover not-ready">
+        <div className="pa handwatch hover not-ready" onClick={()=>to('/test')}>
           <div className="pr">
             <div className="belt"></div>
             <div className="pa dial">
@@ -129,7 +127,7 @@ const Home = () => {
           <div className="details3"></div>
         </div>
 
-        <div className="pa diary hover" onClick={toReader}>
+        <div className="pa diary hover" onClick={() => to('/reader')}>
           <div className="main">
             <div className="cover">
               <div className="pa less"></div>
@@ -137,7 +135,7 @@ const Home = () => {
           </div>
         </div>
 
-        <div className="pa pencil hover" onClick={toEditor}>
+        <div className="pa pencil hover" onClick={() => to('/editor')}>
           <div className="pa pencil-bottom"></div>
           <div className="pencil-nip">
             <div className="pencil-tip"></div>
