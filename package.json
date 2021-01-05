@@ -17,7 +17,7 @@
     "@types/react-router-dom": "^5.1.0",
     "@types/styled-components": "^4.1.20",
     "antd": "^3.24.2",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "electron": "^7.0.0",
     "electron-store": "^5.0.0",
     "ffi-napi": "^2.5.0",
